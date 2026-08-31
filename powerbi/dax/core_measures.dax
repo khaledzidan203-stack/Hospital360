@@ -1,0 +1,226 @@
+// Hospital360 Power BI V1 core measures
+// Dataset: 5,000 synthetic Synthea patients. Measures are analytical examples,
+// not clinical conclusions and not hospital P&L or profitability metrics.
+// Create these measures in the _Measures table and assign display folders.
+
+// -----------------------------------------------------------------------------
+// Activity (9)
+// -----------------------------------------------------------------------------
+
+Total Patients =
+CALCULATE (
+    DISTINCTCOUNT ( 'fact_encounter'[patient_key] ),
+    'fact_encounter'[patient_key] <> 0
+)
+
+Total Encounters =
+COUNTROWS ( 'fact_encounter' )
+
+Total Claims =
+COUNTROWS ( 'fact_claim' )
+
+Total Claim Transactions =
+COUNTROWS ( 'fact_claim_transaction' )
+
+Total Procedures =
+COUNTROWS ( 'fact_procedure' )
+
+Total Condition Occurrences =
+COUNTROWS ( 'fact_condition_occurrence' )
+
+Encounters per Patient =
+DIVIDE ( [Total Encounters], [Total Patients] )
+
+Claims per Encounter =
+DIVIDE (
+    [Total Claims],
+    CALCULATE (
+        DISTINCTCOUNT ( 'fact_claim'[encounter_id] ),
+        'fact_claim'[encounter_id] <> BLANK ()
+    )
+)
+
+Procedures per Encounter =
+DIVIDE ( [Total Procedures], [Total Encounters] )
+
+// -----------------------------------------------------------------------------
+// Financial activity (10). Never add these measures across different grains.
+// -----------------------------------------------------------------------------
+
+Encounter Base Cost =
+SUM ( 'fact_encounter'[base_encounter_cost] )
+
+Encounter Claim Cost =
+SUM ( 'fact_encounter'[total_claim_cost] )
+
+Encounter Payer Coverage =
+SUM ( 'fact_encounter'[payer_coverage] )
+
+Transaction Amount =
+SUM ( 'fact_claim_transaction'[amount] )
+
+Transaction Payments =
+SUM ( 'fact_claim_transaction'[payments] )
+
+Transaction Transfers =
+SUM ( 'fact_claim_transaction'[transfers] )
+
+Procedure Base Cost =
+SUM ( 'fact_procedure'[base_cost] )
+
+// Semantic alias for transaction amount when a visual is explicitly grouped
+// by claim_id from fact_claim_transaction. It is not a claim-header measure.
+Claim Amount =
+[Transaction Amount]
+
+Payment Ratio =
+DIVIDE ( [Transaction Payments], [Transaction Amount] )
+
+Payer Coverage Ratio =
+DIVIDE ( [Encounter Payer Coverage], [Encounter Claim Cost] )
+
+// -----------------------------------------------------------------------------
+// Encounter time intelligence (6); active date role = encounter start date.
+// -----------------------------------------------------------------------------
+
+Encounters MTD =
+CALCULATE ( [Total Encounters], DATESMTD ( 'dim_date'[full_date] ) )
+
+Encounters YTD =
+CALCULATE ( [Total Encounters], DATESYTD ( 'dim_date'[full_date] ) )
+
+Encounters Previous Month =
+CALCULATE ( [Total Encounters], DATEADD ( 'dim_date'[full_date], -1, MONTH ) )
+
+Encounters MoM Change % =
+DIVIDE ( [Total Encounters] - [Encounters Previous Month], [Encounters Previous Month] )
+
+Encounters Previous Year =
+CALCULATE ( [Total Encounters], DATEADD ( 'dim_date'[full_date], -1, YEAR ) )
+
+Encounters YoY Change % =
+DIVIDE ( [Total Encounters] - [Encounters Previous Year], [Encounters Previous Year] )
+
+// -----------------------------------------------------------------------------
+// Claim-amount time intelligence (6). Claim Amount is transaction-derived and
+// follows the active transaction from-date relationship, not claim service date.
+// -----------------------------------------------------------------------------
+
+Claim Amount MTD =
+CALCULATE ( [Claim Amount], DATESMTD ( 'dim_date'[full_date] ) )
+
+Claim Amount YTD =
+CALCULATE ( [Claim Amount], DATESYTD ( 'dim_date'[full_date] ) )
+
+Claim Amount Previous Month =
+CALCULATE ( [Claim Amount], DATEADD ( 'dim_date'[full_date], -1, MONTH ) )
+
+Claim Amount MoM Change % =
+DIVIDE ( [Claim Amount] - [Claim Amount Previous Month], [Claim Amount Previous Month] )
+
+Claim Amount Previous Year =
+CALCULATE ( [Claim Amount], DATEADD ( 'dim_date'[full_date], -1, YEAR ) )
+
+Claim Amount YoY Change % =
+DIVIDE ( [Claim Amount] - [Claim Amount Previous Year], [Claim Amount Previous Year] )
+
+// -----------------------------------------------------------------------------
+// Transaction time intelligence (6); active date role = transaction from date.
+// -----------------------------------------------------------------------------
+
+Transaction Amount MTD =
+CALCULATE ( [Transaction Amount], DATESMTD ( 'dim_date'[full_date] ) )
+
+Transaction Amount YTD =
+CALCULATE ( [Transaction Amount], DATESYTD ( 'dim_date'[full_date] ) )
+
+Transaction Amount Previous Month =
+CALCULATE ( [Transaction Amount], DATEADD ( 'dim_date'[full_date], -1, MONTH ) )
+
+Transaction Amount MoM Change % =
+DIVIDE (
+    [Transaction Amount] - [Transaction Amount Previous Month],
+    [Transaction Amount Previous Month]
+)
+
+Transaction Amount Previous Year =
+CALCULATE ( [Transaction Amount], DATEADD ( 'dim_date'[full_date], -1, YEAR ) )
+
+Transaction Amount YoY Change % =
+DIVIDE (
+    [Transaction Amount] - [Transaction Amount Previous Year],
+    [Transaction Amount Previous Year]
+)
+
+// -----------------------------------------------------------------------------
+// Concentration and Unknown-member measures (7)
+// -----------------------------------------------------------------------------
+
+Top Payer Share =
+VAR IdentifiedPayers =
+    FILTER ( ALLSELECTED ( 'dim_payer'[payer_key] ), 'dim_payer'[payer_key] <> 0 )
+VAR TopPayerAmount =
+    MAXX ( IdentifiedPayers, CALCULATE ( [Transaction Amount] ) )
+VAR SelectedTotal =
+    CALCULATE ( [Transaction Amount], ALLSELECTED ( 'dim_payer'[payer_key] ) )
+RETURN
+    DIVIDE ( TopPayerAmount, SelectedTotal )
+
+Unknown Payer % =
+DIVIDE (
+    CALCULATE ( [Total Claims], 'dim_payer'[payer_key] = 0 ),
+    CALCULATE ( [Total Claims], REMOVEFILTERS ( 'dim_payer' ) )
+)
+
+Top Provider Share =
+VAR IdentifiedProviders =
+    FILTER ( ALLSELECTED ( 'dim_provider'[provider_key] ), 'dim_provider'[provider_key] <> 0 )
+VAR TopProviderEncounters =
+    MAXX ( IdentifiedProviders, CALCULATE ( [Total Encounters] ) )
+VAR SelectedTotal =
+    CALCULATE ( [Total Encounters], ALLSELECTED ( 'dim_provider'[provider_key] ) )
+RETURN
+    DIVIDE ( TopProviderEncounters, SelectedTotal )
+
+Top Organization Share =
+VAR IdentifiedOrganizations =
+    FILTER ( ALLSELECTED ( 'dim_organization'[organization_key] ), 'dim_organization'[organization_key] <> 0 )
+VAR TopOrganizationEncounters =
+    MAXX ( IdentifiedOrganizations, CALCULATE ( [Total Encounters] ) )
+VAR SelectedTotal =
+    CALCULATE ( [Total Encounters], ALLSELECTED ( 'dim_organization'[organization_key] ) )
+RETURN
+    DIVIDE ( TopOrganizationEncounters, SelectedTotal )
+
+Unknown Transaction Payer % =
+DIVIDE (
+    CALCULATE ( [Total Claim Transactions], 'dim_payer'[payer_key] = 0 ),
+    CALCULATE ( [Total Claim Transactions], REMOVEFILTERS ( 'dim_payer' ) )
+)
+
+Sentinel To-Date Transactions =
+CALCULATE (
+    [Total Claim Transactions],
+    'fact_claim_transaction'[source_unset_to_timestamp_warning] = TRUE ()
+)
+
+Sentinel To-Date % =
+DIVIDE ( [Sentinel To-Date Transactions], [Total Claim Transactions] )
+
+// -----------------------------------------------------------------------------
+// Explicit inactive-role examples (2)
+// -----------------------------------------------------------------------------
+
+Encounters by Stop Date =
+CALCULATE (
+    [Total Encounters],
+    USERELATIONSHIP ( 'dim_date'[date_key], 'fact_encounter'[stop_date_key] )
+)
+
+Procedures by Stop Date =
+CALCULATE (
+    [Total Procedures],
+    USERELATIONSHIP ( 'dim_date'[date_key], 'fact_procedure'[stop_date_key] )
+)
+
+// Total measures defined: 46
