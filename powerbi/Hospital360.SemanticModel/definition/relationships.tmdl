@@ -1,0 +1,321 @@
+relationship b9170fb5-9b9e-4820-b9b3-e2b7e860047d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics dim_patient'.birth_date
+	toColumn: LocalDateTable_e25c0d67-595a-44d0-b671-fd85f432a9de.Date
+
+relationship eb07877f-2f94-4d3f-9975-997ad9075459
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics dim_patient'.death_date
+	toColumn: LocalDateTable_c7421c06-21c7-48be-8c8d-96b75b625f7b.Date
+
+relationship 0e531da2-377c-422b-ac38-5dd23c35b138
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_claim'.current_illness_at
+	toColumn: LocalDateTable_3af21209-3628-4b91-9a08-24603e1a1363.Date
+
+relationship 6e9d9ee1-ac0f-409d-9a13-f0a6dc39f015
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_claim'.service_at
+	toColumn: LocalDateTable_e36b1867-24b2-47cf-9616-587899e239d1.Date
+
+relationship 1330cf45-895f-46de-8f24-539e361bf8c2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_claim'.last_billed_at_1
+	toColumn: LocalDateTable_4d221001-1d89-4312-bcc2-fa1747690797.Date
+
+relationship 58bbca18-d18f-4520-be62-07ace509ae02
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_claim'.last_billed_at_2
+	toColumn: LocalDateTable_ff34084b-2ec7-4f3a-a313-8507e8d0d7b3.Date
+
+relationship c710d151-ee2d-4358-b07b-d5788858af44
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_claim'.last_billed_at_primary
+	toColumn: LocalDateTable_1e5e4f63-2ed3-4cc8-8af9-4ee9d1440909.Date
+
+relationship b1a761de-88a3-49f8-aa27-39b7efe28524
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_claim_transaction'.from_at
+	toColumn: LocalDateTable_c13cf318-d3ae-404b-be39-5cc193a3c74f.Date
+
+relationship 05201d70-3683-428f-96cf-0519cb759355
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_claim_transaction'.to_at
+	toColumn: LocalDateTable_d6b9dc80-8006-44d1-92d1-7f3f7ad14558.Date
+
+relationship 96340588-11b7-477f-80c4-4068103b40da
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_condition_occurrence'.start_date
+	toColumn: LocalDateTable_999f8c40-3cd6-4a6c-a483-8ccaf197d4a1.Date
+
+relationship d8443baf-f816-496f-8458-5200cf56299a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_condition_occurrence'.stop_date
+	toColumn: LocalDateTable_41922746-b3d1-48ae-8a76-8300738cfbd3.Date
+
+relationship 5852cf65-4f00-40d1-ac77-f522e44bfeb5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_encounter'.start_at
+	toColumn: LocalDateTable_7ec42bb7-b0e1-4164-bb81-aa2ac58fe540.Date
+
+relationship 295bd5c4-ec6f-4744-97df-61fa38ee2749
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_encounter'.stop_at
+	toColumn: LocalDateTable_adf660f3-b8ed-4d9c-84c8-d26a0a9b17d0.Date
+
+relationship 71e82cbf-c7c5-451f-aa12-344db3ae7a55
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_procedure'.start_at
+	toColumn: LocalDateTable_36147ab4-121c-43ef-bc54-ac8114ca2086.Date
+
+relationship 5deeb2dc-f8e0-4311-9cbb-fcf68aa51146
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics fact_procedure'.stop_at
+	toColumn: LocalDateTable_9f2f286e-57fb-4295-adb1-e2b873dc811a.Date
+
+relationship 7b99cb6a-dcd5-4e72-881f-5520f142150e
+	fromColumn: 'analytics fact_claim'.current_illness_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship bb0ec87c-ff29-4020-b11a-1ab651b399bd
+	isActive: false
+	fromColumn: 'analytics fact_claim'.last_billed_date_key_1
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4fd1f7c6-c4ae-4c4d-a54d-0098432b1e32
+	isActive: false
+	fromColumn: 'analytics fact_claim'.last_billed_date_key_2
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship f8cb2075-d857-4b74-9217-78ac5b2ee305
+	isActive: false
+	fromColumn: 'analytics fact_claim'.last_billed_date_key_primary
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4f60a8c5-655d-4d5a-add4-522e5fe4db68
+	isActive: false
+	fromColumn: 'analytics fact_claim'.service_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship cf3d6979-638b-4676-80fa-424a74151a49
+	fromColumn: 'analytics fact_claim'.organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 480a0d29-3129-46fa-9bdd-dca385822ef3
+	fromColumn: 'analytics fact_claim'.patient_key
+	toColumn: 'analytics dim_patient'.patient_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4dde3608-9d4b-43cd-ab2e-5de4552754e7
+	fromColumn: 'analytics fact_claim'.primary_payer_key
+	toColumn: 'analytics dim_payer'.payer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 68836a40-5dd3-46e2-be7d-6c2b449acce7
+	isActive: false
+	fromColumn: 'analytics fact_claim'.secondary_payer_key
+	toColumn: 'analytics dim_payer'.payer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 565cec86-41b9-46fc-83a0-7e0f8fc74957
+	fromColumn: 'analytics fact_claim'.provider_key
+	toColumn: 'analytics dim_provider'.provider_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship f970aedb-9a02-4f2e-bacc-72f296fe1e75
+	isActive: false
+	fromColumn: 'analytics fact_claim'.referring_provider_key
+	toColumn: 'analytics dim_provider'.provider_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 0b2dac91-76ab-42fa-b6a0-ab48964631f9
+	isActive: false
+	fromColumn: 'analytics fact_claim'.supervising_provider_key
+	toColumn: 'analytics dim_provider'.provider_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 315b0bef-a074-4d4e-adfa-56dcbc10dfd2
+	fromColumn: 'analytics fact_claim_transaction'.from_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship efe6a585-bfd4-4b2b-a2c5-c2ac6ffaf65a
+	isActive: false
+	fromColumn: 'analytics fact_claim_transaction'.to_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3f4705c1-3b28-43c2-81c5-745dfc53b8cd
+	fromColumn: 'analytics fact_claim_transaction'.organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship ed07d3d2-63ad-4424-a16a-ede37cf1f271
+	fromColumn: 'analytics fact_claim_transaction'.patient_key
+	toColumn: 'analytics dim_patient'.patient_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a25a23e4-5cc9-4e9a-b52e-c4f89d027d63
+	fromColumn: 'analytics fact_claim_transaction'.claim_primary_payer_key
+	toColumn: 'analytics dim_payer'.payer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2ded2c71-c74b-447e-8de7-68c8e0ab76b6
+	fromColumn: 'analytics fact_claim_transaction'.provider_key
+	toColumn: 'analytics dim_provider'.provider_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 16515b4d-c66f-4e49-a67b-40bd8e498fd7
+	isActive: false
+	fromColumn: 'analytics fact_claim_transaction'.supervising_provider_key
+	toColumn: 'analytics dim_provider'.provider_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 39284fe3-032f-4b5c-b9c9-02850427c507
+	fromColumn: 'analytics fact_condition_occurrence'.condition_key
+	toColumn: 'analytics dim_condition'.condition_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 8469a35f-a42a-478c-aa01-27e9e78ee978
+	fromColumn: 'analytics fact_condition_occurrence'.start_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 53cacac9-2d53-478d-9429-3693ac77041e
+	isActive: false
+	fromColumn: 'analytics fact_condition_occurrence'.stop_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5a0b57b9-0805-404a-b72d-431a6f644962
+	fromColumn: 'analytics fact_condition_occurrence'.encounter_organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 29086281-3729-41c2-9298-549846e3a04e
+	fromColumn: 'analytics fact_condition_occurrence'.patient_key
+	toColumn: 'analytics dim_patient'.patient_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3b79bae3-cb7a-4bc8-a85d-7000e4432410
+	fromColumn: 'analytics fact_condition_occurrence'.encounter_payer_key
+	toColumn: 'analytics dim_payer'.payer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship f194bf82-9579-4be7-a6d0-f73b315f0e51
+	fromColumn: 'analytics fact_condition_occurrence'.encounter_provider_key
+	toColumn: 'analytics dim_provider'.provider_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3a524379-6b82-4ea8-b3be-83198b4e9052
+	fromColumn: 'analytics fact_encounter'.start_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a476819d-b0ee-4336-980c-f252ff591c6a
+	isActive: false
+	fromColumn: 'analytics fact_encounter'.stop_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 815f06e1-c8d9-4b7e-bfc0-d061bfde0036
+	fromColumn: 'analytics fact_encounter'.organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b100e04c-c8a8-403f-95d5-9e232370b603
+	fromColumn: 'analytics fact_encounter'.patient_key
+	toColumn: 'analytics dim_patient'.patient_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4819d2ab-2373-4d15-9960-bdd22d1a85d2
+	fromColumn: 'analytics fact_encounter'.payer_key
+	toColumn: 'analytics dim_payer'.payer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship f2891f17-f126-42cb-99a3-fad39ee047d4
+	fromColumn: 'analytics fact_encounter'.provider_key
+	toColumn: 'analytics dim_provider'.provider_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship ac243dcc-1aed-4b1a-8fd5-99b3e453b288
+	fromColumn: 'analytics fact_procedure'.start_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 359bcab8-5c1d-488a-acd8-4e12b805d5eb
+	isActive: false
+	fromColumn: 'analytics fact_procedure'.stop_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 632f3deb-2fc9-4976-b868-504c2bdc5279
+	fromColumn: 'analytics fact_procedure'.encounter_organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b4711e7f-f571-4bb5-9372-ee78ed3c4c6b
+	fromColumn: 'analytics fact_procedure'.patient_key
+	toColumn: 'analytics dim_patient'.patient_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship df9f04cb-e58f-4fa9-a6b0-abf0242edde3
+	fromColumn: 'analytics fact_procedure'.encounter_payer_key
+	toColumn: 'analytics dim_payer'.payer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 9b6fa3c3-7197-4268-82e7-90fdcdfdb8db
+	fromColumn: 'analytics fact_procedure'.procedure_key
+	toColumn: 'analytics dim_procedure'.procedure_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 06045ef3-89b8-4e6f-80c5-4d88be8354f9
+	fromColumn: 'analytics fact_procedure'.encounter_provider_key
+	toColumn: 'analytics dim_provider'.provider_key
+
+	annotation PBI_IsFromSource = FS
+

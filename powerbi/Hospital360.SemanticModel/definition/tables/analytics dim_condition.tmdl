@@ -1,0 +1,61 @@
+table 'analytics dim_condition'
+	lineageTag: 2ac87a44-75af-421e-8124-84a03bf8c442
+
+	column condition_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 0633d37b-d047-4738-8c31-e76fc4a47220
+		summarizeBy: none
+		sourceColumn: condition_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_system
+		dataType: string
+		lineageTag: d337a7ac-d2e8-4be9-90dd-ad4d49614abd
+		summarizeBy: none
+		sourceColumn: code_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column condition_code
+		dataType: string
+		lineageTag: 54dd9c3a-f67e-4154-90fc-a22c967ec510
+		summarizeBy: none
+		sourceColumn: condition_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column condition_description
+		dataType: string
+		lineageTag: 46a9d5e7-baff-4ace-8ae8-4c5f674f5bd8
+		summarizeBy: none
+		sourceColumn: condition_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_system
+		dataType: string
+		lineageTag: 1435b893-bff2-4aed-869e-7ecce37b3a3c
+		summarizeBy: none
+		sourceColumn: source_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_table
+		dataType: string
+		lineageTag: 49ed22ec-17af-40e8-8854-df65091188ba
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_condition' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_condition = Source{[Schema="analytics",Item="dim_condition"]}[Data]
+				in
+				    analytics_dim_condition
+

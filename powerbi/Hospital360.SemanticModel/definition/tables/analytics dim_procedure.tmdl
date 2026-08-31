@@ -1,0 +1,61 @@
+table 'analytics dim_procedure'
+	lineageTag: 5f044f54-bede-4571-9b0a-045e15df9adf
+
+	column procedure_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 36d9e6b9-a7c8-4edd-9579-96cf5940fd41
+		summarizeBy: none
+		sourceColumn: procedure_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_system
+		dataType: string
+		lineageTag: 592051e9-ceb0-425d-a104-d68b48c98fe1
+		summarizeBy: none
+		sourceColumn: code_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_code
+		dataType: string
+		lineageTag: 9e7fbb3b-0aba-4dd9-bd77-c476cca4fdf3
+		summarizeBy: none
+		sourceColumn: procedure_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_description
+		dataType: string
+		lineageTag: ece3f12e-2918-4baa-b0b4-d2837f0f332e
+		summarizeBy: none
+		sourceColumn: procedure_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_system
+		dataType: string
+		lineageTag: ff3351df-cc00-43bf-9f3c-03157b1b217c
+		summarizeBy: none
+		sourceColumn: source_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_table
+		dataType: string
+		lineageTag: fcdfe8d7-920b-4b1a-8274-1e0e7638e8de
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_procedure' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_procedure = Source{[Schema="analytics",Item="dim_procedure"]}[Data]
+				in
+				    analytics_dim_procedure
+

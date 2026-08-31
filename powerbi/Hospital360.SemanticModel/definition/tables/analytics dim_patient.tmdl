@@ -1,0 +1,185 @@
+table 'analytics dim_patient'
+	lineageTag: 42ad7c38-7711-449d-ac2d-b8f943f52916
+
+	column patient_key
+		dataType: int64
+		formatString: 0
+		lineageTag: b4d23ccf-0a40-4510-844b-9212014d13b6
+		summarizeBy: none
+		sourceColumn: patient_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column patient_id
+		dataType: string
+		lineageTag: a0695ec4-2ce1-4ad6-b84b-3696d7846c83
+		summarizeBy: none
+		sourceColumn: patient_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column birth_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a081d6f6-6339-420b-919a-dca23fdfa8e8
+		summarizeBy: none
+		sourceColumn: birth_date
+
+		variation Variation
+			isDefault
+			relationship: b9170fb5-9b9e-4820-b9b3-e2b7e860047d
+			defaultHierarchy: LocalDateTable_e25c0d67-595a-44d0-b671-fd85f432a9de.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column death_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 182afb7e-d263-48a0-b72e-9d5c1e38cf1a
+		summarizeBy: none
+		sourceColumn: death_date
+
+		variation Variation
+			isDefault
+			relationship: eb07877f-2f94-4d3f-9975-997ad9075459
+			defaultHierarchy: LocalDateTable_c7421c06-21c7-48be-8c8d-96b75b625f7b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column marital_status
+		dataType: string
+		lineageTag: d52f2569-9b15-498c-95e3-dfffaaf9220f
+		summarizeBy: none
+		sourceColumn: marital_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column race
+		dataType: string
+		lineageTag: d3588d12-9aa0-43ce-93a4-cfb828b714ae
+		summarizeBy: none
+		sourceColumn: race
+
+		annotation SummarizationSetBy = Automatic
+
+	column ethnicity
+		dataType: string
+		lineageTag: cf4a1880-6ac9-4657-abde-dd6cebcab30a
+		summarizeBy: none
+		sourceColumn: ethnicity
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: fbc04b22-a3d1-41a8-8258-e551fc68d56f
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column birthplace
+		dataType: string
+		lineageTag: 4404f4f0-d4f3-48ec-98f1-4c4491c311e3
+		summarizeBy: none
+		sourceColumn: birthplace
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: d3916dbe-5cd2-4b2f-845e-7733dec63d8c
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: fea4a4c7-8ea6-455e-a273-e1eb9443cb58
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column county
+		dataType: string
+		lineageTag: fa76b245-3283-4c45-a03c-e60e767d0a85
+		summarizeBy: none
+		sourceColumn: county
+
+		annotation SummarizationSetBy = Automatic
+
+	column fips
+		dataType: string
+		lineageTag: 163c2c06-3aa6-49d9-8f17-110466afa7d7
+		summarizeBy: none
+		sourceColumn: fips
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip
+		dataType: string
+		lineageTag: 5e8decfb-e57c-4780-9012-3ac76f7b4dcf
+		summarizeBy: none
+		sourceColumn: zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: e7cacc82-b13d-4413-a2c5-770bacdaa21d
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 6f487ca5-3b7e-488b-b9c9-02bce9d37084
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column source_system
+		dataType: string
+		lineageTag: e6153900-0be4-401f-943b-7bb880e6df0c
+		summarizeBy: none
+		sourceColumn: source_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_table
+		dataType: string
+		lineageTag: de43eba9-8acf-4ca7-89dc-bcd67801282b
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_row_hash
+		dataType: string
+		lineageTag: 5afcae31-25f2-46e5-ae5a-21b144484918
+		summarizeBy: none
+		sourceColumn: source_row_hash
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_patient' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_patient = Source{[Schema="analytics",Item="dim_patient"]}[Data]
+				in
+				    analytics_dim_patient
+

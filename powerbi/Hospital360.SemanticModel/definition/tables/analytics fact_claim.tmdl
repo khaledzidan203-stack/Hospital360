@@ -1,0 +1,393 @@
+table 'analytics fact_claim'
+	lineageTag: 0c5f14f1-829d-4260-8612-32c76c840d96
+
+	column claim_fact_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 829a448f-c83d-4dbf-a32f-9e083f0a4381
+		summarizeBy: sum
+		sourceColumn: claim_fact_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column claim_id
+		dataType: string
+		lineageTag: 53111b73-6a70-4d26-8917-b39e45cc5872
+		summarizeBy: none
+		sourceColumn: claim_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column encounter_id
+		dataType: string
+		lineageTag: 1d67bcd6-ad03-4f08-a916-7c2c88393b99
+		summarizeBy: none
+		sourceColumn: encounter_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column patient_key
+		dataType: int64
+		formatString: 0
+		lineageTag: b8777eed-d825-4f6b-9f0b-7950a00b7aee
+		summarizeBy: none
+		sourceColumn: patient_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column provider_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 844ff327-6c8e-4cf0-9f5c-87e89920d8c5
+		summarizeBy: none
+		sourceColumn: provider_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column supervising_provider_key
+		dataType: int64
+		formatString: 0
+		lineageTag: d53d26f7-8658-4110-b08d-350c9860ccf8
+		summarizeBy: sum
+		sourceColumn: supervising_provider_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column referring_provider_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 078b872e-bbf6-4acc-9555-ddfff882a438
+		summarizeBy: sum
+		sourceColumn: referring_provider_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 8302155d-a570-4cbe-8f3e-1ce7aa7ca261
+		summarizeBy: none
+		sourceColumn: organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column primary_payer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 82598c15-aad7-4e34-aeed-30c9729a901b
+		summarizeBy: none
+		sourceColumn: primary_payer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column secondary_payer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: d8ed6e3c-7876-4565-8676-4e7e52539415
+		summarizeBy: sum
+		sourceColumn: secondary_payer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column current_illness_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e17a293-663e-4759-a3c4-079b03798594
+		summarizeBy: none
+		sourceColumn: current_illness_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f35df99d-1456-424f-951e-35fd502e21e1
+		summarizeBy: sum
+		sourceColumn: service_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_billed_date_key_1
+		dataType: int64
+		formatString: 0
+		lineageTag: ea2d881c-5d4f-49c0-b199-ae53ac571a63
+		summarizeBy: sum
+		sourceColumn: last_billed_date_key_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_billed_date_key_2
+		dataType: int64
+		formatString: 0
+		lineageTag: ce311657-590c-47cf-aa53-b8ad814d881d
+		summarizeBy: sum
+		sourceColumn: last_billed_date_key_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_billed_date_key_primary
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cf45187-2e73-49a4-9562-9b3bd190fa9e
+		summarizeBy: sum
+		sourceColumn: last_billed_date_key_primary
+
+		annotation SummarizationSetBy = Automatic
+
+	column current_illness_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: cf339f34-1a41-457c-8d67-505570db89bc
+		summarizeBy: none
+		sourceColumn: current_illness_at
+
+		variation Variation
+			isDefault
+			relationship: 0e531da2-377c-422b-ac38-5dd23c35b138
+			defaultHierarchy: LocalDateTable_3af21209-3628-4b91-9a08-24603e1a1363.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 44532b3c-d8b0-470e-9415-c9d6a463607f
+		summarizeBy: none
+		sourceColumn: service_at
+
+		variation Variation
+			isDefault
+			relationship: 6e9d9ee1-ac0f-409d-9a13-f0a6dc39f015
+			defaultHierarchy: LocalDateTable_e36b1867-24b2-47cf-9616-587899e239d1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_billed_at_1
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7ba78261-2fc8-4d86-b413-35f5bb3b4675
+		summarizeBy: none
+		sourceColumn: last_billed_at_1
+
+		variation Variation
+			isDefault
+			relationship: 1330cf45-895f-46de-8f24-539e361bf8c2
+			defaultHierarchy: LocalDateTable_4d221001-1d89-4312-bcc2-fa1747690797.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_billed_at_2
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f66498c4-4e7e-4ea4-8dc9-15dc39fe4a03
+		summarizeBy: none
+		sourceColumn: last_billed_at_2
+
+		variation Variation
+			isDefault
+			relationship: 58bbca18-d18f-4520-be62-07ace509ae02
+			defaultHierarchy: LocalDateTable_ff34084b-2ec7-4f3a-a313-8507e8d0d7b3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_billed_at_primary
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 338eeda0-f3cf-4400-b253-275366a5bf67
+		summarizeBy: none
+		sourceColumn: last_billed_at_primary
+
+		variation Variation
+			isDefault
+			relationship: c710d151-ee2d-4358-b07b-d5788858af44
+			defaultHierarchy: LocalDateTable_1e5e4f63-2ed3-4cc8-8af9-4ee9d1440909.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4838f06b-1142-4c81-921e-0e25595c85af
+		summarizeBy: sum
+		sourceColumn: department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column patient_department_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4beca515-2fc5-4484-9768-1da7195b1f71
+		summarizeBy: sum
+		sourceColumn: patient_department_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_1
+		dataType: string
+		lineageTag: 56b15a07-11c9-40a3-adc7-eef41d2f77d5
+		summarizeBy: none
+		sourceColumn: status_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_2
+		dataType: string
+		lineageTag: e614d99f-3c84-4546-8684-c8c9577a4c52
+		summarizeBy: none
+		sourceColumn: status_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_primary
+		dataType: string
+		lineageTag: 4531e58f-dced-42ac-a4db-a6faa58023f9
+		summarizeBy: none
+		sourceColumn: status_primary
+
+		annotation SummarizationSetBy = Automatic
+
+	column healthcare_claim_type_id_1
+		dataType: int64
+		formatString: 0
+		lineageTag: 1e1bb501-06cb-4e14-a0b8-4ffc2b59d7d0
+		summarizeBy: sum
+		sourceColumn: healthcare_claim_type_id_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column healthcare_claim_type_id_2
+		dataType: int64
+		formatString: 0
+		lineageTag: 7de3d451-65b9-4f47-beda-f459001b4f42
+		summarizeBy: sum
+		sourceColumn: healthcare_claim_type_id_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_1
+		dataType: string
+		lineageTag: 949add79-8087-48a6-95e0-6ace48118e76
+		summarizeBy: none
+		sourceColumn: diagnosis_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_2
+		dataType: string
+		lineageTag: 662c33ca-5829-46a0-87f2-03bcb36489e4
+		summarizeBy: none
+		sourceColumn: diagnosis_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_3
+		dataType: string
+		lineageTag: 3df6fc60-0054-47e4-bb06-99fc18e74257
+		summarizeBy: none
+		sourceColumn: diagnosis_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_4
+		dataType: string
+		lineageTag: 2880fc68-a6e7-4003-b5c0-a84cf994add9
+		summarizeBy: none
+		sourceColumn: diagnosis_4
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_5
+		dataType: string
+		lineageTag: 94400a33-1299-4eaa-b949-3326e8bd207b
+		summarizeBy: none
+		sourceColumn: diagnosis_5
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_6
+		dataType: string
+		lineageTag: d1163dbe-bcd9-48e4-a577-9e520c10a880
+		summarizeBy: none
+		sourceColumn: diagnosis_6
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_7
+		dataType: string
+		lineageTag: 0bc59f45-3c76-48be-820e-6d368e32e2da
+		summarizeBy: none
+		sourceColumn: diagnosis_7
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnosis_8
+		dataType: string
+		lineageTag: 86b008e9-66bb-4849-8dc6-05384638e6f7
+		summarizeBy: none
+		sourceColumn: diagnosis_8
+
+		annotation SummarizationSetBy = Automatic
+
+	column outstanding_1
+		dataType: double
+		lineageTag: 20075eab-e34b-42fb-8085-ccd8d7843682
+		summarizeBy: sum
+		sourceColumn: outstanding_1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column outstanding_2
+		dataType: double
+		lineageTag: 52e93976-94ad-42db-aab2-e72dc17904e8
+		summarizeBy: sum
+		sourceColumn: outstanding_2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column outstanding_primary
+		dataType: double
+		lineageTag: 17fe7d6f-bfcc-406e-abfd-e82dd57c9fdb
+		summarizeBy: sum
+		sourceColumn: outstanding_primary
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column source_system
+		dataType: string
+		lineageTag: ec990a45-2083-46b6-a84d-534f88abfa0f
+		summarizeBy: none
+		sourceColumn: source_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_table
+		dataType: string
+		lineageTag: 58bf3f4e-0d2f-4c97-89b1-40255d506e9d
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_row_hash
+		dataType: string
+		lineageTag: 897790a7-23e1-4391-bdc7-b8a73c39a94f
+		summarizeBy: none
+		sourceColumn: source_row_hash
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_claim' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_fact_claim = Source{[Schema="analytics",Item="fact_claim"]}[Data]
+				in
+				    analytics_fact_claim
+

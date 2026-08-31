@@ -1,0 +1,397 @@
+table _Measures
+	lineageTag: bb0c2478-e50f-4e50-a6e7-7dbcda7cebe3
+
+	measure 'Total Patients' =
+			
+			CALCULATE(
+			    COUNTROWS('analytics dim_patient'),
+			    'analytics dim_patient'[patient_key] <> 0
+			)
+		formatString: 0
+		lineageTag: e6dc977b-538d-4edb-abe8-1fffa8c1230f
+
+	measure 'Total Claims' =
+			
+			COUNTROWS('analytics fact_claim')
+		formatString: 0
+		lineageTag: e8fbd7ff-9c32-435e-baa2-ec95206f1ce5
+
+	measure 'Total Claim Transactions' =
+			
+			COUNTROWS('analytics fact_claim_transaction')
+		formatString: 0
+		lineageTag: 6afc69ea-bfed-47ef-9a5d-51d8786aeb18
+
+	measure 'Total Procedures' =
+			
+			COUNTROWS('analytics fact_procedure')
+		formatString: 0
+		lineageTag: 25937a97-27ed-4e6e-9387-a32146e29f1d
+
+	measure 'Total Condition Occurrences' =
+			
+			COUNTROWS('analytics fact_condition_occurrence')
+		formatString: 0
+		lineageTag: 24c44921-937e-4648-84bf-604d62fa560c
+
+	measure 'Encounters per Patient' =
+			
+			DIVIDE(
+			    [Total Encounters],
+			    [Total Patients],
+			    0
+			)
+		lineageTag: b3e582d4-6592-4ed8-a7b0-84b1f986e36e
+
+	measure 'Claims per Encounter' =
+			
+			DIVIDE(
+			    [Total Claims],
+			    [Total Encounters],
+			    0
+			)
+		lineageTag: 8e2063d2-eb5a-4c27-95bb-707871cbb595
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Encounters' =
+			
+			COUNTROWS('analytics fact_encounter')
+		formatString: 0
+		lineageTag: 7b19045a-add0-45aa-981f-a2f81a2f7d97
+
+	measure 'Procedures per Encounter' =
+			
+			DIVIDE(
+			    [Total Procedures],
+			    [Total Encounters],
+			    0
+			)
+		lineageTag: 3fc5a2ae-8355-4494-8fe4-f6a526885290
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Encounter Base Cost' =
+			
+			SUM('analytics fact_encounter'[base_encounter_cost])
+		lineageTag: c5ccc144-e26b-4224-a670-44fec04debac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Encounter Claim Cost' =
+			
+			SUM('analytics fact_encounter'[total_claim_cost])
+		lineageTag: ea9aed61-11a7-4113-bf41-f442b05e18b4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Encounter Payer Coverage' =
+			
+			SUM('analytics fact_encounter'[payer_coverage])
+		lineageTag: e7037ba1-26bf-430b-b5fa-53b9fae3c39a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Transaction Amount' =
+			
+			SUM('analytics fact_claim_transaction'[amount])
+		lineageTag: f8a64ab0-dc02-40ec-a078-8a83ed56db90
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Transaction Payments' =
+			
+			SUM('analytics fact_claim_transaction'[payments])
+		lineageTag: d46d04d7-68d3-41cc-a555-e9764b984011
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Transaction Transfers' =
+			
+			SUM('analytics fact_claim_transaction'[transfers])
+		lineageTag: 8d387bf9-a30d-46e5-b5b1-1cfd83cd01de
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Procedure Base Cost' =
+			
+			SUM('analytics fact_procedure'[base_cost])
+		lineageTag: 4f2d2ac8-bf05-4327-9432-0fc155131add
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Payment Ratio' =
+			
+			DIVIDE(
+			    [Transaction Payments],
+			    [Transaction Amount],
+			    0
+			)
+		lineageTag: 25f22455-5507-4043-be8b-cbb13b6e1b95
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Payer Coverage Ratio' =
+			
+			DIVIDE(
+			    [Encounter Payer Coverage],
+			    [Encounter Claim Cost],
+			    0
+			)
+		lineageTag: 55e6a088-50f4-482c-aec2-f16e63b6d15e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Claim Amount' = [Transaction Amount]
+		lineageTag: 0e478abf-b9af-4601-9925-1976280ce579
+
+	measure 'Encounters Previous Month' = CALCULATE ( [Total Encounters], DATEADD ( 'analytics dim_date'[full_date], -1, MONTH ) )
+		lineageTag: fb7ec854-9102-4116-9d0a-7b7922045651
+
+	measure 'Encounters Previous Year' = CALCULATE ( [Total Encounters], DATEADD ( 'analytics dim_date'[full_date], -1, YEAR ) )
+		lineageTag: b18b0b23-0ce3-4f0a-ba4d-16a5a2bfbe77
+
+	measure 'Claim Amount Previous Month' = CALCULATE ( [Claim Amount], DATEADD ( 'analytics dim_date'[full_date], -1, MONTH ) )
+		lineageTag: 7a689eeb-7ec3-4232-8ba5-bb3099a39fa1
+
+	measure 'Claim Amount Previous Year' = CALCULATE ( [Claim Amount], DATEADD ( 'analytics dim_date'[full_date], -1, YEAR ) )
+		lineageTag: e70e8842-46d1-484a-b9eb-276a535c0142
+
+	measure 'Transaction Amount Previous Month' = CALCULATE ( [Transaction Amount], DATEADD ( 'analytics dim_date'[full_date], -1, MONTH ) )
+		lineageTag: a58ae47f-e15a-4e61-a6f5-186b8e7ef8a7
+
+	measure 'Transaction Amount Previous Year' = CALCULATE ( [Transaction Amount], DATEADD ( 'analytics dim_date'[full_date], -1, YEAR ) )
+		lineageTag: 93be62e7-e7f0-41e3-b9ef-42720aab1c49
+
+	measure 'Sentinel To-Date Transactions' =
+			
+			CALCULATE (
+			    [Total Claim Transactions],
+			    'analytics fact_claim_transaction'[to_at]
+			        = DATE ( 1970, 1, 1 ) + TIME ( 3, 0, 0 )
+			)
+		formatString: 0
+		lineageTag: 916016a8-1026-4b92-b8fc-f446b5bccddf
+
+	measure 'Encounters MTD' =
+			CALCULATE (
+			    [Total Encounters],
+			    DATESMTD ( 'analytics dim_date'[full_date] )
+			)
+		lineageTag: 22b392c1-9c2d-45db-8b11-3f58b1c4937a
+
+	measure 'Encounters YTD' =
+			CALCULATE (
+			    [Total Encounters],
+			    DATESYTD ( 'analytics dim_date'[full_date] )
+			)
+		lineageTag: 97df1f6b-d4c6-44e5-a9df-e6e0e8121dfa
+
+	measure 'Encounters MoM Change %' =
+			DIVIDE (
+			    [Total Encounters] - [Encounters Previous Month],
+			    [Encounters Previous Month]
+			)
+		lineageTag: 2010809e-af1b-4c13-b95f-7dca826054d0
+
+	measure 'Encounters YoY Change %' =
+			DIVIDE (
+			    [Total Encounters] - [Encounters Previous Year],
+			    [Encounters Previous Year]
+			)
+		lineageTag: d2825021-3284-4073-97cc-e3fb3d43b91c
+
+	measure 'Claim Amount MTD' =
+			CALCULATE (
+			    [Claim Amount],
+			    DATESMTD ( 'analytics dim_date'[full_date] )
+			)
+		lineageTag: d1ac03e2-43f9-44bf-9abd-f8e551cc0a6d
+
+	measure 'Claim Amount YTD' =
+			CALCULATE (
+			    [Claim Amount],
+			    DATESYTD ( 'analytics dim_date'[full_date] )
+			)
+		lineageTag: c51c9d15-2f0c-468c-b99b-b556c69944cc
+
+	measure 'Claim Amount MoM Change %' =
+			DIVIDE (
+			    [Claim Amount] - [Claim Amount Previous Month],
+			    [Claim Amount Previous Month]
+			)
+		lineageTag: deac1a22-5d97-4ae2-8d43-e1fe94c47e68
+
+	measure 'Claim Amount YoY Change %' =
+			DIVIDE (
+			    [Claim Amount] - [Claim Amount Previous Year],
+			    [Claim Amount Previous Year]
+			)
+		lineageTag: 85fb83b9-3768-454e-a2cf-b0f61cfe823c
+
+	measure 'Transaction Amount MTD' =
+			CALCULATE (
+			    [Transaction Amount],
+			    DATESMTD ( 'analytics dim_date'[full_date] )
+			)
+		lineageTag: b107276f-b589-4985-8c39-ab26ebecbb6d
+
+	measure 'Transaction Amount YTD' =
+			CALCULATE (
+			    [Transaction Amount],
+			    DATESYTD ( 'analytics dim_date'[full_date] )
+			)
+		lineageTag: 8926b259-4ef6-4364-9823-80616342a497
+
+	measure 'Transaction Amount MoM Change %' =
+			DIVIDE (
+			    [Transaction Amount] - [Transaction Amount Previous Month],
+			    [Transaction Amount Previous Month]
+			)
+		lineageTag: c4ec6f0e-635f-480a-983f-a3b10f6aa7b0
+
+	measure 'Transaction Amount YoY Change %' =
+			DIVIDE (
+			    [Transaction Amount] - [Transaction Amount Previous Year],
+			    [Transaction Amount Previous Year]
+			)
+		lineageTag: 9aff184a-8b70-4eaf-820a-c7deebc52979
+
+	measure 'Top Payer Share' =
+			VAR IdentifiedPayers =
+			    FILTER (
+			        ALLSELECTED ( 'analytics dim_payer'[payer_key] ),
+			        'analytics dim_payer'[payer_key] <> 0
+			    )
+			VAR TopPayerAmount =
+			    MAXX (
+			        IdentifiedPayers,
+			        CALCULATE ( [Transaction Amount] )
+			    )
+			VAR SelectedTotal =
+			    CALCULATE (
+			        [Transaction Amount],
+			        ALLSELECTED ( 'analytics dim_payer'[payer_key] )
+			    )
+			RETURN
+			    DIVIDE ( TopPayerAmount, SelectedTotal )
+		lineageTag: 76f9f95f-766f-41a5-849c-9e1d96e18a10
+
+	measure 'Unknown Payer %' =
+			DIVIDE (
+			    CALCULATE (
+			        [Total Claims],
+			        'analytics dim_payer'[payer_key] = 0
+			    ),
+			    CALCULATE (
+			        [Total Claims],
+			        REMOVEFILTERS ( 'analytics dim_payer' )
+			    )
+			)
+		lineageTag: cdc0f302-6b90-4b1f-b975-b429f599eccd
+
+	measure 'Top Provider Share' =
+			VAR IdentifiedProviders =
+			    FILTER (
+			        ALLSELECTED ( 'analytics dim_provider'[provider_key] ),
+			        'analytics dim_provider'[provider_key] <> 0
+			    )
+			VAR TopProviderEncounters =
+			    MAXX (
+			        IdentifiedProviders,
+			        CALCULATE ( [Total Encounters] )
+			    )
+			VAR SelectedTotal =
+			    CALCULATE (
+			        [Total Encounters],
+			        ALLSELECTED ( 'analytics dim_provider'[provider_key] )
+			    )
+			RETURN
+			    DIVIDE ( TopProviderEncounters, SelectedTotal )
+		lineageTag: 07e0a85a-1b60-44bd-bb3a-52b00e7a488d
+
+	measure 'Top Organization Share' =
+			VAR IdentifiedOrganizations =
+			    FILTER (
+			        ALLSELECTED ( 'analytics dim_organization'[organization_key] ),
+			        'analytics dim_organization'[organization_key] <> 0
+			    )
+			VAR TopOrganizationEncounters =
+			    MAXX (
+			        IdentifiedOrganizations,
+			        CALCULATE ( [Total Encounters] )
+			    )
+			VAR SelectedTotal =
+			    CALCULATE (
+			        [Total Encounters],
+			        ALLSELECTED ( 'analytics dim_organization'[organization_key] )
+			    )
+			RETURN
+			    DIVIDE ( TopOrganizationEncounters, SelectedTotal )
+		lineageTag: 45c166d8-b328-4ab3-8ae2-10bc6c9f2f44
+
+	measure 'Unknown Transaction Payer %' =
+			DIVIDE (
+			    CALCULATE (
+			        [Total Claim Transactions],
+			        'analytics dim_payer'[payer_key] = 0
+			    ),
+			    CALCULATE (
+			        [Total Claim Transactions],
+			        REMOVEFILTERS ( 'analytics dim_payer' )
+			    )
+			)
+		lineageTag: bca6d5e0-9bb5-4d62-9743-c7667c9f34ce
+
+	measure 'Sentinel To-Date %' =
+			
+			DIVIDE (
+			    [Sentinel To-Date Transactions],
+			    [Total Claim Transactions]
+			)
+		lineageTag: 47544faa-a91d-459b-adc7-2cbd8970f7e7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Encounters by Stop Date' =
+			CALCULATE (
+			    [Total Encounters],
+			    USERELATIONSHIP (
+			        'analytics dim_date'[date_key],
+			        'analytics fact_encounter'[stop_date_key]
+			    )
+			)
+		lineageTag: 4138b283-c94f-4dcd-b3b8-dd080dea2fd1
+
+	measure 'Procedures by Stop Date' =
+			CALCULATE (
+			    [Total Procedures],
+			    USERELATIONSHIP (
+			        'analytics dim_date'[date_key],
+			        'analytics fact_procedure'[stop_date_key]
+			    )
+			)
+		lineageTag: d11041df-94da-4126-a53c-97a21aeb79a3
+
+	column 'Measure Group'
+		isHidden
+		lineageTag: 501ab242-978d-4c98-84a3-d71ca5383e3a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Measure Group]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Measure Group", STRING,
+				    {
+				        {"Hospital360 Measures"}
+				    }
+				)
+
+	annotation PBI_Id = 108cf5b77233454cb3ecc0ff2c64fbb4
+

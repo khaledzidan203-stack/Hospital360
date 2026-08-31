@@ -1,0 +1,108 @@
+table 'analytics dim_provider'
+	lineageTag: bd16ec75-91de-43bc-a6e2-1b7e8024531e
+
+	column provider_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 56c0cc02-ff5a-4b0d-9137-520ebba63d7e
+		summarizeBy: none
+		sourceColumn: provider_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column provider_id
+		dataType: string
+		lineageTag: 85e83e50-7779-4dc3-88a6-c5bf89dd5963
+		summarizeBy: none
+		sourceColumn: provider_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_encounter_provider
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 63845a35-509a-48ed-b664-0fc5f8a9f106
+		summarizeBy: none
+		sourceColumn: observed_as_encounter_provider
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_claim_provider
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 87865ae5-fd56-4bf8-baf0-82b2c87cfabf
+		summarizeBy: none
+		sourceColumn: observed_as_claim_provider
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_claim_supervisor
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 650da1d4-fe7f-4cb1-a3a0-149efe952a61
+		summarizeBy: none
+		sourceColumn: observed_as_claim_supervisor
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_claim_referrer
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2306c3be-cc55-431f-83f1-f18be03a91fb
+		summarizeBy: none
+		sourceColumn: observed_as_claim_referrer
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_transaction_provider
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5e4aa0b3-d797-4244-a3f4-2e54d72e3bc6
+		summarizeBy: none
+		sourceColumn: observed_as_transaction_provider
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_transaction_supervisor
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8b3dbc15-9086-461c-9f15-d41d5a2640e7
+		summarizeBy: none
+		sourceColumn: observed_as_transaction_supervisor
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_inferred_reference
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ef8203dd-9cf1-4be7-937f-a35217c46c43
+		summarizeBy: none
+		sourceColumn: is_inferred_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_system
+		dataType: string
+		lineageTag: 3c938c0a-a240-4fc3-8466-684ad331b3b5
+		summarizeBy: none
+		sourceColumn: source_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_scope
+		dataType: string
+		lineageTag: d8a819bf-2b7a-4a0b-ad09-fa9d44b5c88b
+		summarizeBy: none
+		sourceColumn: source_scope
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_provider' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_provider = Source{[Schema="analytics",Item="dim_provider"]}[Data]
+				in
+				    analytics_dim_provider
+

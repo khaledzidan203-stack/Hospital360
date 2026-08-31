@@ -1,0 +1,28 @@
+EVALUATE
+UNION (
+    ROW (
+        "Measure", "Sentinel To-Date Transactions",
+        "Actual", [Sentinel To-Date Transactions],
+        "Expected", 317271,
+        "Status",
+            IF (
+                [Sentinel To-Date Transactions] = 317271,
+                "PASS",
+                "FAIL"
+            )
+    ),
+    ROW (
+        "Measure", "Sentinel To-Date %",
+        "Actual", [Sentinel To-Date %],
+        "Expected", DIVIDE ( 317271, 3966064 ),
+        "Status",
+            IF (
+                ABS (
+                    [Sentinel To-Date %]
+                        - DIVIDE ( 317271, 3966064 )
+                ) < 0.000001,
+                "PASS",
+                "FAIL"
+            )
+    )
+)

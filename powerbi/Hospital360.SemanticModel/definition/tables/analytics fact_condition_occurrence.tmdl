@@ -1,0 +1,150 @@
+table 'analytics fact_condition_occurrence'
+	lineageTag: af6de7b0-7b81-48ae-bcc2-cee71e36bb26
+
+	column condition_occurrence_fact_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 3cafb1de-724c-434e-b24c-208376af7a31
+		summarizeBy: sum
+		sourceColumn: condition_occurrence_fact_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column encounter_id
+		dataType: string
+		lineageTag: a52f90fa-4307-4329-9e8d-5cb36dd3333d
+		summarizeBy: none
+		sourceColumn: encounter_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column patient_key
+		dataType: int64
+		formatString: 0
+		lineageTag: adb6303e-0e20-4981-8897-5b528e86608b
+		summarizeBy: none
+		sourceColumn: patient_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column condition_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 7523d5a5-98c3-44c3-9db2-b7d6514213ec
+		summarizeBy: none
+		sourceColumn: condition_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column encounter_provider_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c3bf78b-86a6-4fde-a1b4-5fbfe744dec4
+		summarizeBy: none
+		sourceColumn: encounter_provider_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column encounter_organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 0abb0371-f412-4ea1-897d-85b32d852ef3
+		summarizeBy: none
+		sourceColumn: encounter_organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column encounter_payer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f3815f41-b1f0-4396-81f8-96bbb47fbfbf
+		summarizeBy: none
+		sourceColumn: encounter_payer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 036c8aea-e3e4-4700-8b4d-64d339b753bc
+		summarizeBy: none
+		sourceColumn: start_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column stop_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: af7e0763-23cb-4f9b-b2b3-1f68057a9ae7
+		summarizeBy: sum
+		sourceColumn: stop_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0aa05d6d-b820-4820-a2b4-65059b412139
+		summarizeBy: none
+		sourceColumn: start_date
+
+		variation Variation
+			isDefault
+			relationship: 96340588-11b7-477f-80c4-4068103b40da
+			defaultHierarchy: LocalDateTable_999f8c40-3cd6-4a6c-a483-8ccaf197d4a1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column stop_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d35bf965-a133-4e47-8f80-281ef7bb2d42
+		summarizeBy: none
+		sourceColumn: stop_date
+
+		variation Variation
+			isDefault
+			relationship: d8443baf-f816-496f-8458-5200cf56299a
+			defaultHierarchy: LocalDateTable_41922746-b3d1-48ae-8a76-8300738cfbd3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column source_system
+		dataType: string
+		lineageTag: 234aecab-4c0f-4b01-8458-9e4bd3c7987a
+		summarizeBy: none
+		sourceColumn: source_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_table
+		dataType: string
+		lineageTag: 2d5c3428-45f9-4fc3-a533-750d2b94d1e0
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_row_hash
+		dataType: string
+		lineageTag: e1938b3d-d479-40df-8d37-2d9a7b79b6dd
+		summarizeBy: none
+		sourceColumn: source_row_hash
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_condition_occurrence' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_fact_condition_occurrence = Source{[Schema="analytics",Item="fact_condition_occurrence"]}[Data]
+				in
+				    analytics_fact_condition_occurrence
+
+	annotation PBI_ResultType = Table
+

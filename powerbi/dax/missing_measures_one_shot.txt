@@ -1,0 +1,137 @@
+// Hospital360 missing core measures — Power BI Desktop TMDL View
+// Creates only the 28 measures not already present in _Measures.
+// Source of truth: powerbi/dax/core_measures.dax
+// This script creates measures only. It does not create tables or columns,
+// change relationships, access PostgreSQL, or define profitability metrics.
+
+createOrReplace
+
+    ref table _Measures
+
+        measure 'Claim Amount' = [Transaction Amount]
+
+        measure 'Encounters MTD' =
+                CALCULATE ( [Total Encounters], DATESMTD ( 'dim_date'[full_date] ) )
+
+        measure 'Encounters YTD' =
+                CALCULATE ( [Total Encounters], DATESYTD ( 'dim_date'[full_date] ) )
+
+        measure 'Encounters Previous Month' =
+                CALCULATE ( [Total Encounters], DATEADD ( 'dim_date'[full_date], -1, MONTH ) )
+
+        measure 'Encounters MoM Change %' =
+                DIVIDE ( [Total Encounters] - [Encounters Previous Month], [Encounters Previous Month] )
+
+        measure 'Encounters Previous Year' =
+                CALCULATE ( [Total Encounters], DATEADD ( 'dim_date'[full_date], -1, YEAR ) )
+
+        measure 'Encounters YoY Change %' =
+                DIVIDE ( [Total Encounters] - [Encounters Previous Year], [Encounters Previous Year] )
+
+        measure 'Claim Amount MTD' =
+                CALCULATE ( [Claim Amount], DATESMTD ( 'dim_date'[full_date] ) )
+
+        measure 'Claim Amount YTD' =
+                CALCULATE ( [Claim Amount], DATESYTD ( 'dim_date'[full_date] ) )
+
+        measure 'Claim Amount Previous Month' =
+                CALCULATE ( [Claim Amount], DATEADD ( 'dim_date'[full_date], -1, MONTH ) )
+
+        measure 'Claim Amount MoM Change %' =
+                DIVIDE ( [Claim Amount] - [Claim Amount Previous Month], [Claim Amount Previous Month] )
+
+        measure 'Claim Amount Previous Year' =
+                CALCULATE ( [Claim Amount], DATEADD ( 'dim_date'[full_date], -1, YEAR ) )
+
+        measure 'Claim Amount YoY Change %' =
+                DIVIDE ( [Claim Amount] - [Claim Amount Previous Year], [Claim Amount Previous Year] )
+
+        measure 'Transaction Amount MTD' =
+                CALCULATE ( [Transaction Amount], DATESMTD ( 'dim_date'[full_date] ) )
+
+        measure 'Transaction Amount YTD' =
+                CALCULATE ( [Transaction Amount], DATESYTD ( 'dim_date'[full_date] ) )
+
+        measure 'Transaction Amount Previous Month' =
+                CALCULATE ( [Transaction Amount], DATEADD ( 'dim_date'[full_date], -1, MONTH ) )
+
+        measure 'Transaction Amount MoM Change %' =
+                DIVIDE (
+                    [Transaction Amount] - [Transaction Amount Previous Month],
+                    [Transaction Amount Previous Month]
+                )
+
+        measure 'Transaction Amount Previous Year' =
+                CALCULATE ( [Transaction Amount], DATEADD ( 'dim_date'[full_date], -1, YEAR ) )
+
+        measure 'Transaction Amount YoY Change %' =
+                DIVIDE (
+                    [Transaction Amount] - [Transaction Amount Previous Year],
+                    [Transaction Amount Previous Year]
+                )
+
+        measure 'Top Payer Share' =
+                VAR IdentifiedPayers =
+                    FILTER ( ALLSELECTED ( 'dim_payer'[payer_key] ), 'dim_payer'[payer_key] <> 0 )
+                VAR TopPayerAmount =
+                    MAXX ( IdentifiedPayers, CALCULATE ( [Transaction Amount] ) )
+                VAR SelectedTotal =
+                    CALCULATE ( [Transaction Amount], ALLSELECTED ( 'dim_payer'[payer_key] ) )
+                RETURN
+                    DIVIDE ( TopPayerAmount, SelectedTotal )
+
+        measure 'Unknown Payer %' =
+                DIVIDE (
+                    CALCULATE ( [Total Claims], 'dim_payer'[payer_key] = 0 ),
+                    CALCULATE ( [Total Claims], REMOVEFILTERS ( 'dim_payer' ) )
+                )
+
+        measure 'Top Provider Share' =
+                VAR IdentifiedProviders =
+                    FILTER ( ALLSELECTED ( 'dim_provider'[provider_key] ), 'dim_provider'[provider_key] <> 0 )
+                VAR TopProviderEncounters =
+                    MAXX ( IdentifiedProviders, CALCULATE ( [Total Encounters] ) )
+                VAR SelectedTotal =
+                    CALCULATE ( [Total Encounters], ALLSELECTED ( 'dim_provider'[provider_key] ) )
+                RETURN
+                    DIVIDE ( TopProviderEncounters, SelectedTotal )
+
+        measure 'Top Organization Share' =
+                VAR IdentifiedOrganizations =
+                    FILTER (
+                        ALLSELECTED ( 'dim_organization'[organization_key] ),
+                        'dim_organization'[organization_key] <> 0
+                    )
+                VAR TopOrganizationEncounters =
+                    MAXX ( IdentifiedOrganizations, CALCULATE ( [Total Encounters] ) )
+                VAR SelectedTotal =
+                    CALCULATE ( [Total Encounters], ALLSELECTED ( 'dim_organization'[organization_key] ) )
+                RETURN
+                    DIVIDE ( TopOrganizationEncounters, SelectedTotal )
+
+        measure 'Unknown Transaction Payer %' =
+                DIVIDE (
+                    CALCULATE ( [Total Claim Transactions], 'dim_payer'[payer_key] = 0 ),
+                    CALCULATE ( [Total Claim Transactions], REMOVEFILTERS ( 'dim_payer' ) )
+                )
+
+        measure 'Sentinel To-Date Transactions' =
+                CALCULATE (
+                    [Total Claim Transactions],
+                    'fact_claim_transaction'[source_unset_to_timestamp_warning] = TRUE ()
+                )
+
+        measure 'Sentinel To-Date %' =
+                DIVIDE ( [Sentinel To-Date Transactions], [Total Claim Transactions] )
+
+        measure 'Encounters by Stop Date' =
+                CALCULATE (
+                    [Total Encounters],
+                    USERELATIONSHIP ( 'dim_date'[date_key], 'fact_encounter'[stop_date_key] )
+                )
+
+        measure 'Procedures by Stop Date' =
+                CALCULATE (
+                    [Total Procedures],
+                    USERELATIONSHIP ( 'dim_date'[date_key], 'fact_procedure'[stop_date_key] )
+                )

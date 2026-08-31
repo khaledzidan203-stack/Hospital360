@@ -1,0 +1,72 @@
+table 'analytics dim_organization'
+	lineageTag: 397a11e1-f255-40e2-9d59-bcc372642d7a
+
+	column organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c10e1d9-0517-4efa-8ba1-a9815f8b602d
+		summarizeBy: none
+		sourceColumn: organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column organization_id
+		dataType: string
+		lineageTag: 8fa59262-bed7-4dbf-ac96-c8c86c9f7008
+		summarizeBy: none
+		sourceColumn: organization_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_encounter_organization
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 646776be-6cc6-48ad-b36f-62eeaf53e6dc
+		summarizeBy: none
+		sourceColumn: observed_as_encounter_organization
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_place_of_service
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 201d1146-218c-447b-a4cd-1f7a8f39ba23
+		summarizeBy: none
+		sourceColumn: observed_as_place_of_service
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_inferred_reference
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1f4deb39-4363-4b60-a3ba-5630f1c693d6
+		summarizeBy: none
+		sourceColumn: is_inferred_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_system
+		dataType: string
+		lineageTag: f9df8bf5-a23d-4e31-80d0-3abf567eb146
+		summarizeBy: none
+		sourceColumn: source_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_scope
+		dataType: string
+		lineageTag: c472a273-a375-4250-96e1-5b6663387433
+		summarizeBy: none
+		sourceColumn: source_scope
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_organization' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_organization = Source{[Schema="analytics",Item="dim_organization"]}[Data]
+				in
+				    analytics_dim_organization
+

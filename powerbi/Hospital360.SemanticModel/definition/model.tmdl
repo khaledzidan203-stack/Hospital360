@@ -1,0 +1,47 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["analytics dim_condition","analytics dim_date","analytics dim_organization","analytics dim_patient","analytics dim_payer","analytics dim_procedure","analytics dim_provider","analytics fact_claim","analytics fact_claim_transaction","analytics fact_condition_occurrence","analytics fact_encounter","analytics fact_procedure"]
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","DaxQueryView_Desktop","DevMode"]
+
+ref table 'analytics dim_condition'
+ref table 'analytics dim_date'
+ref table DateTableTemplate_ae552ea7-1321-452a-86c8-1c75d06c214d
+ref table 'analytics dim_organization'
+ref table 'analytics dim_patient'
+ref table LocalDateTable_e25c0d67-595a-44d0-b671-fd85f432a9de
+ref table LocalDateTable_c7421c06-21c7-48be-8c8d-96b75b625f7b
+ref table 'analytics dim_payer'
+ref table 'analytics dim_procedure'
+ref table 'analytics dim_provider'
+ref table 'analytics fact_claim'
+ref table LocalDateTable_3af21209-3628-4b91-9a08-24603e1a1363
+ref table LocalDateTable_e36b1867-24b2-47cf-9616-587899e239d1
+ref table LocalDateTable_4d221001-1d89-4312-bcc2-fa1747690797
+ref table LocalDateTable_ff34084b-2ec7-4f3a-a313-8507e8d0d7b3
+ref table LocalDateTable_1e5e4f63-2ed3-4cc8-8af9-4ee9d1440909
+ref table 'analytics fact_claim_transaction'
+ref table LocalDateTable_c13cf318-d3ae-404b-be39-5cc193a3c74f
+ref table LocalDateTable_d6b9dc80-8006-44d1-92d1-7f3f7ad14558
+ref table 'analytics fact_condition_occurrence'
+ref table LocalDateTable_999f8c40-3cd6-4a6c-a483-8ccaf197d4a1
+ref table LocalDateTable_41922746-b3d1-48ae-8a76-8300738cfbd3
+ref table 'analytics fact_encounter'
+ref table LocalDateTable_7ec42bb7-b0e1-4164-bb81-aa2ac58fe540
+ref table LocalDateTable_adf660f3-b8ed-4d9c-84c8-d26a0a9b17d0
+ref table 'analytics fact_procedure'
+ref table LocalDateTable_36147ab4-121c-43ef-bc54-ac8114ca2086
+ref table LocalDateTable_9f2f286e-57fb-4295-adb1-e2b873dc811a
+ref table _Measures
+
+ref cultureInfo en-US
+

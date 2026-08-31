@@ -1,0 +1,172 @@
+table 'analytics fact_procedure'
+	lineageTag: 0d4aad1c-25f3-47d9-aea6-76878ef2b2e7
+
+	column procedure_fact_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 76122630-c160-4856-bfaa-e2d5d1f8ea5f
+		summarizeBy: sum
+		sourceColumn: procedure_fact_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column encounter_id
+		dataType: string
+		lineageTag: 0ded3549-2197-43f1-ae52-d24881a3608a
+		summarizeBy: none
+		sourceColumn: encounter_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column patient_key
+		dataType: int64
+		formatString: 0
+		lineageTag: b7104e93-0cbf-437a-8b26-e63df3db6c9f
+		summarizeBy: none
+		sourceColumn: patient_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 79e0eae2-3583-41fa-ad7d-bf019381f979
+		summarizeBy: none
+		sourceColumn: procedure_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column encounter_provider_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 7d4b9bc5-adf4-475d-8de8-06d89262ec3a
+		summarizeBy: none
+		sourceColumn: encounter_provider_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column encounter_organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: db576ff3-c819-4d3f-a0d5-bb67dd157e92
+		summarizeBy: none
+		sourceColumn: encounter_organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column encounter_payer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 94ae8329-3ca9-4f9e-bab5-4ace9025f675
+		summarizeBy: none
+		sourceColumn: encounter_payer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: daddb340-59c4-4db0-80c6-6febbdafcc98
+		summarizeBy: none
+		sourceColumn: start_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column stop_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 46466e10-dd72-4c3f-b3de-904456fb45aa
+		summarizeBy: sum
+		sourceColumn: stop_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 332e25b7-0ccd-4c11-ba5c-c1054dfdde81
+		summarizeBy: none
+		sourceColumn: start_at
+
+		variation Variation
+			isDefault
+			relationship: 71e82cbf-c7c5-451f-aa12-344db3ae7a55
+			defaultHierarchy: LocalDateTable_36147ab4-121c-43ef-bc54-ac8114ca2086.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column stop_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ee2ffc34-7372-4206-8b42-d16d03a1a692
+		summarizeBy: none
+		sourceColumn: stop_at
+
+		variation Variation
+			isDefault
+			relationship: 5deeb2dc-f8e0-4311-9cbb-fcf68aa51146
+			defaultHierarchy: LocalDateTable_9f2f286e-57fb-4295-adb1-e2b873dc811a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column reason_code
+		dataType: string
+		lineageTag: 03d0e291-84b7-4240-81a0-d198a35928da
+		summarizeBy: none
+		sourceColumn: reason_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column reason_description
+		dataType: string
+		lineageTag: 1d72ce80-c836-4a69-a861-55fd9bf2bcfb
+		summarizeBy: none
+		sourceColumn: reason_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column base_cost
+		dataType: double
+		lineageTag: 32d7f017-991b-483b-be07-36cce2a36a2a
+		summarizeBy: sum
+		sourceColumn: base_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column source_system
+		dataType: string
+		lineageTag: edac9226-6eea-4ff5-9926-03fea34a2a4b
+		summarizeBy: none
+		sourceColumn: source_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_table
+		dataType: string
+		lineageTag: 02ae384c-e9c9-432d-9d5b-c420aa6a2ca3
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_row_hash
+		dataType: string
+		lineageTag: c2ee6a2a-470f-4c77-b7c9-22e38b5b2df8
+		summarizeBy: none
+		sourceColumn: source_row_hash
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_procedure' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_fact_procedure = Source{[Schema="analytics",Item="fact_procedure"]}[Data]
+				in
+				    analytics_fact_procedure
+
+	annotation PBI_ResultType = Table
+

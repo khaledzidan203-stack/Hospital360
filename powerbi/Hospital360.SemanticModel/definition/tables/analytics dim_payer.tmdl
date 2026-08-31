@@ -1,0 +1,81 @@
+table 'analytics dim_payer'
+	lineageTag: df8fbe49-bbc1-4f91-b206-aac1ab1cfb67
+
+	column payer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 0fa03e9a-4dfa-4c93-a9ca-16fca40f89ed
+		summarizeBy: none
+		sourceColumn: payer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column payer_id
+		dataType: string
+		lineageTag: 9e702b0e-ce3b-4a9e-ae8b-f6e60d24d2e5
+		summarizeBy: none
+		sourceColumn: payer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_encounter_payer
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b0300839-94fe-4a1d-8b54-7ed5817df1c5
+		summarizeBy: none
+		sourceColumn: observed_as_encounter_payer
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_primary_claim_payer
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2ff595c0-0dfa-4b50-981a-cd831239ac46
+		summarizeBy: none
+		sourceColumn: observed_as_primary_claim_payer
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_as_secondary_claim_payer
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 10c80b0e-f7aa-43f7-a993-d2fe94773a05
+		summarizeBy: none
+		sourceColumn: observed_as_secondary_claim_payer
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_inferred_reference
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6395e1bc-c29d-4372-9bd9-fa939e3c3e44
+		summarizeBy: none
+		sourceColumn: is_inferred_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_system
+		dataType: string
+		lineageTag: 38a462ae-1f6d-4cf2-a38b-b9cf828d5ce0
+		summarizeBy: none
+		sourceColumn: source_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_scope
+		dataType: string
+		lineageTag: 194b5eb0-af66-471c-9cca-a54d85bf67bb
+		summarizeBy: none
+		sourceColumn: source_scope
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_payer' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_payer = Source{[Schema="analytics",Item="dim_payer"]}[Data]
+				in
+				    analytics_dim_payer
+

@@ -67,6 +67,11 @@ $RECYCLE.BIN/
 logs/
 *.log
 
+# Power BI Desktop binary artifacts (PBIP/PBIR source is version controlled)
+powerbi/*.pbix
+**/.pbi/cache.abf
+**/.pbi/localSettings.json
+
 # Generated data (retain folder placeholders)
 data/raw/**
 !data/raw/**/

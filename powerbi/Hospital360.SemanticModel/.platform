@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Hospital360"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2dbb7f69-150e-4098-b605-00a81e385f4a"
+  }
+}
