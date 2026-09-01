@@ -4,10 +4,10 @@
   "position": {
     "x": 90,
     "y": 650,
-    "z": 220,
+    "z": 29000,
     "height": 180,
     "width": 405,
-    "tabOrder": 30
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "actionButton",
@@ -268,7 +268,7 @@
             "showDefaultTooltip": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }

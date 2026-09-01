@@ -178,3 +178,4 @@ table 'analytics fact_finance_monthly'
 				    analytics_fact_finance_monthly
 
 	annotation PBI_ResultType = Table
+

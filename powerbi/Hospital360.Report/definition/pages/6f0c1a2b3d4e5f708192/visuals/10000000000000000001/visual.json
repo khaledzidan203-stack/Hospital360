@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "10000000000000000001",
   "position": {
     "x": 80,
     "y": 24,
-    "z": 1000,
-    "width": 592,
+    "z": 4000,
     "height": 56,
+    "width": 592,
     "tabOrder": 0
   },
   "visual": {
@@ -21,10 +21,10 @@
                   {
                     "value": "Hospital360 — Executive Overview",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "28px",
-                      "color": "#0F4C45",
-                      "fontWeight": "bold"
+                      "color": "#0f4c45"
                     }
                   }
                 ],

@@ -214,3 +214,4 @@ table 'analytics fact_workforce_monthly'
 				    analytics_fact_workforce_monthly
 
 	annotation PBI_ResultType = Table
+

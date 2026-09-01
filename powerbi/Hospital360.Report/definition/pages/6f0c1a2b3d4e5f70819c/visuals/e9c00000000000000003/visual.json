@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "e9c00000000000000003",
   "position": {
-    "x": 24,
-    "y": 25,
-    "z": 1003,
-    "width": 44,
-    "height": 42,
-    "tabOrder": 3
+    "x": 23.859164653089405,
+    "y": 23.859164653089405,
+    "z": 3000,
+    "height": 31.016914049016226,
+    "width": 21.473248187780463,
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,8 +23,7 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI Emoji",
                       "fontSize": "22px",
-                      "color": "#0F4C45",
-                      "fontWeight": "semibold"
+                      "color": "#0f4c45"
                     }
                   }
                 ],

@@ -77,3 +77,4 @@ table 'analytics dim_it_system'
 				    analytics_dim_it_system
 
 	annotation PBI_ResultType = Table
+

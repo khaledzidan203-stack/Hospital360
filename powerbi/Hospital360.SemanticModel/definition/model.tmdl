@@ -41,6 +41,7 @@ ref table LocalDateTable_adf660f3-b8ed-4d9c-84c8-d26a0a9b17d0
 ref table 'analytics fact_procedure'
 ref table LocalDateTable_36147ab4-121c-43ef-bc54-ac8114ca2086
 ref table LocalDateTable_9f2f286e-57fb-4295-adb1-e2b873dc811a
+ref table _Measures
 ref table 'analytics dim_department'
 ref table 'analytics dim_cost_category'
 ref table 'analytics dim_budget_scenario'
@@ -53,7 +54,8 @@ ref table 'analytics fact_workforce_monthly'
 ref table 'analytics fact_operations_daily'
 ref table 'analytics fact_it_incident'
 ref table 'analytics fact_it_system_daily'
-ref table _Measures
+ref table LocalDateTable_c8341cdd-6cde-4ba0-b7f3-b63671da2ecb
+ref table LocalDateTable_7c19d87d-5684-4d76-ac79-7eb7b8fb4b27
 
 ref cultureInfo en-US
 

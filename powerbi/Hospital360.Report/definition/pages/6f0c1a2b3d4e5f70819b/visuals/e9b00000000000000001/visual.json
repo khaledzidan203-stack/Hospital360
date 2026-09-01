@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "e9b00000000000000001",
   "position": {
     "x": 82,
     "y": 18,
-    "z": 1001,
-    "width": 650,
+    "z": 1000,
     "height": 54,
-    "tabOrder": 1
+    "width": 650,
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "textbox",
@@ -21,10 +21,10 @@
                   {
                     "value": "Financial Performance",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "28px",
-                      "color": "#0F4C45",
-                      "fontWeight": "bold"
+                      "color": "#0f4c45"
                     }
                   }
                 ],

@@ -4,7 +4,7 @@
   "position": {
     "x": 90,
     "y": 240,
-    "z": 210,
+    "z": 19000,
     "height": 180,
     "width": 405,
     "tabOrder": 0
@@ -170,6 +170,13 @@
                   "Value": "false"
                 }
               }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
             }
           }
         }
@@ -268,7 +275,7 @@
             "showDefaultTooltip": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }

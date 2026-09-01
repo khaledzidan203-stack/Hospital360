@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "31000000000000000007",
   "position": {
     "x": 1425,
     "y": 445,
-    "z": 210,
-    "width": 405,
+    "z": 26000,
     "height": 180,
-    "tabOrder": 0
+    "width": 405,
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "actionButton",
@@ -268,7 +268,7 @@
             "showDefaultTooltip": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }

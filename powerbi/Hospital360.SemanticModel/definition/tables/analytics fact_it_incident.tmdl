@@ -206,3 +206,4 @@ table 'analytics fact_it_incident'
 				    analytics_fact_it_incident
 
 	annotation PBI_ResultType = Table
+

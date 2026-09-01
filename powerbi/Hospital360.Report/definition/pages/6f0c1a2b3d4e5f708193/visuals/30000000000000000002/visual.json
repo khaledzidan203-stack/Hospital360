@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "30000000000000000002",
   "position": {
-    "x": 160,
-    "y": 46,
-    "z": 100,
-    "width": 1600,
-    "height": 152,
-    "tabOrder": 1
+    "x": 293.46772523299967,
+    "y": 45.332412840869871,
+    "z": 9000,
+    "height": 138.38315498791854,
+    "width": 1426.7780462547464,
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,10 +21,10 @@
                   {
                     "value": "Hospital360",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "42px",
-                      "color": "#0F4C45",
-                      "fontWeight": "bold"
+                      "color": "#0f4c45"
                     }
                   }
                 ],
@@ -37,8 +37,7 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "22px",
-                      "color": "#1F2933",
-                      "fontWeight": "semibold"
+                      "color": "#1f2933"
                     }
                   }
                 ],

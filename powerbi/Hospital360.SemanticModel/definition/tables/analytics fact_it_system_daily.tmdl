@@ -186,3 +186,4 @@ table 'analytics fact_it_system_daily'
 				    analytics_fact_it_system_daily
 
 	annotation PBI_ResultType = Table
+

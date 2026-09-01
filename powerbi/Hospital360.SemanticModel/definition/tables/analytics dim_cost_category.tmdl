@@ -69,3 +69,4 @@ table 'analytics dim_cost_category'
 				    analytics_dim_cost_category
 
 	annotation PBI_ResultType = Table
+

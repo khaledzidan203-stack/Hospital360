@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "e9b00000000000000016",
   "position": {
     "x": 32,
     "y": 270,
-    "z": 1016,
-    "width": 448,
+    "z": 16000,
     "height": 342,
-    "tabOrder": 16
+    "width": 448,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "lineChart",
@@ -269,7 +269,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -360,6 +360,26 @@
         }
       ],
       "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
         {
           "properties": {
             "show": {

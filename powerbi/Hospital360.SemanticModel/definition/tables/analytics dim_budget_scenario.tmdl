@@ -61,3 +61,4 @@ table 'analytics dim_budget_scenario'
 				    analytics_dim_budget_scenario
 
 	annotation PBI_ResultType = Table
+

@@ -60,3 +60,4 @@ table 'analytics dim_incident_category'
 				    analytics_dim_incident_category
 
 	annotation PBI_ResultType = Table
+

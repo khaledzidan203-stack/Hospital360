@@ -68,3 +68,4 @@ table 'analytics dim_employee_role'
 				    analytics_dim_employee_role
 
 	annotation PBI_ResultType = Table
+

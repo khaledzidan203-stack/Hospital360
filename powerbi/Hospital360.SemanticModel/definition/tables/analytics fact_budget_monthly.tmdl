@@ -128,3 +128,4 @@ table 'analytics fact_budget_monthly'
 				    analytics_fact_budget_monthly
 
 	annotation PBI_ResultType = Table
+

@@ -463,3 +463,14 @@ relationship a5407a63-3c06-5439-856c-9866cc3b3132
 	toColumn: 'analytics dim_it_system'.it_system_key
 
 	annotation PBI_IsFromSource = FS
+
+relationship bf674068-f10c-4ec5-84d4-3e8257b837ab
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics dim_department'.effective_start_date
+	toColumn: LocalDateTable_c8341cdd-6cde-4ba0-b7f3-b63671da2ecb.Date
+
+relationship 449f6a1e-d05e-4849-9aa1-dabe3893f3c4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'analytics dim_department'.effective_end_date
+	toColumn: LocalDateTable_7c19d87d-5684-4d76-ac79-7eb7b8fb4b27.Date
+

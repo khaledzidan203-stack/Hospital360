@@ -62,7 +62,7 @@ table 'analytics dim_department'
 		dataType: int64
 		formatString: 0
 		lineageTag: 252ad133-6d73-5ae3-883e-a9ff0e64f6d7
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: organization_key
 
 		annotation SummarizationSetBy = Automatic
@@ -77,19 +77,35 @@ table 'analytics dim_department'
 
 	column effective_start_date
 		dataType: dateTime
+		formatString: Long Date
 		lineageTag: 8e75b314-2923-5555-85a6-8734ad8608dd
 		summarizeBy: none
 		sourceColumn: effective_start_date
 
+		variation Variation
+			isDefault
+			relationship: bf674068-f10c-4ec5-84d4-3e8257b837ab
+			defaultHierarchy: LocalDateTable_c8341cdd-6cde-4ba0-b7f3-b63671da2ecb.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
 
 	column effective_end_date
 		dataType: dateTime
+		formatString: Long Date
 		lineageTag: ddd0a510-f606-57db-9bfa-37c81e3746cc
 		summarizeBy: none
 		sourceColumn: effective_end_date
 
+		variation Variation
+			isDefault
+			relationship: 449f6a1e-d05e-4849-9aa1-dabe3893f3c4
+			defaultHierarchy: LocalDateTable_7c19d87d-5684-4d76-ac79-7eb7b8fb4b27.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
 
 	column is_active
 		dataType: boolean
@@ -117,3 +133,4 @@ table 'analytics dim_department'
 				    analytics_dim_department
 
 	annotation PBI_ResultType = Table
+

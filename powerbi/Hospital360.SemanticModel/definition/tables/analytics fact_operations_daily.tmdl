@@ -243,3 +243,4 @@ table 'analytics fact_operations_daily'
 				    analytics_fact_operations_daily
 
 	annotation PBI_ResultType = Table
+
