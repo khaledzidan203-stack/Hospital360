@@ -1,0 +1,216 @@
+table 'analytics fact_workforce_monthly'
+	lineageTag: 3ee4b2f1-24a8-50ec-8064-d65dde1ee680
+
+	column workforce_monthly_key
+		dataType: int64
+		formatString: 0
+		lineageTag: e8eeede8-1e24-5494-87aa-8edaf782a479
+		summarizeBy: none
+		sourceColumn: workforce_monthly_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_start_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: b595fa84-74b5-5750-85b0-e4f41650fa52
+		summarizeBy: none
+		sourceColumn: month_start_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a04fdcd-87d1-5373-bd68-d02a858b3faa
+		summarizeBy: none
+		sourceColumn: organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 55375b72-bf37-573c-b89f-94fe33879daf
+		summarizeBy: none
+		sourceColumn: department_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column employee_role_key
+		dataType: int64
+		formatString: 0
+		lineageTag: fdac422e-0d8d-5dd3-a2a1-7c6c4cef640b
+		summarizeBy: none
+		sourceColumn: employee_role_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column headcount_start
+		dataType: int64
+		formatString: 0
+		lineageTag: fcb7c439-8d22-5d28-8ea0-1d3160a85db1
+		summarizeBy: sum
+		sourceColumn: headcount_start
+
+		annotation SummarizationSetBy = Automatic
+
+	column headcount
+		dataType: int64
+		formatString: 0
+		lineageTag: 76f38df6-21f6-5046-9270-75f1d3df6291
+		summarizeBy: sum
+		sourceColumn: headcount
+
+		annotation SummarizationSetBy = Automatic
+
+	column headcount_end
+		dataType: int64
+		formatString: 0
+		lineageTag: b929b2fd-3742-52f4-90a3-11a7ff021b7b
+		summarizeBy: sum
+		sourceColumn: headcount_end
+
+		annotation SummarizationSetBy = Automatic
+
+	column average_headcount
+		dataType: double
+		lineageTag: e386f621-abc7-5d40-b8fb-9c8341c44d69
+		summarizeBy: sum
+		sourceColumn: average_headcount
+
+		annotation SummarizationSetBy = Automatic
+
+	column fte_start
+		dataType: double
+		lineageTag: 786d3e11-a9bf-5589-8f38-416b52275df1
+		summarizeBy: sum
+		sourceColumn: fte_start
+
+		annotation SummarizationSetBy = Automatic
+
+	column fte
+		dataType: double
+		lineageTag: ce8ae106-086e-596c-bc87-0ff2672508da
+		summarizeBy: sum
+		sourceColumn: fte
+
+		annotation SummarizationSetBy = Automatic
+
+	column fte_end
+		dataType: double
+		lineageTag: eb9156d1-0c68-5aed-9711-d88cac7cb311
+		summarizeBy: sum
+		sourceColumn: fte_end
+
+		annotation SummarizationSetBy = Automatic
+
+	column average_fte
+		dataType: double
+		lineageTag: 6caa0ee8-d63b-5e7a-b674-aebb8c976c1e
+		summarizeBy: sum
+		sourceColumn: average_fte
+
+		annotation SummarizationSetBy = Automatic
+
+	column new_hires
+		dataType: int64
+		formatString: 0
+		lineageTag: cfb8fbf1-a40d-56f8-a6e1-f33b06bf94e2
+		summarizeBy: sum
+		sourceColumn: new_hires
+
+		annotation SummarizationSetBy = Automatic
+
+	column turnover_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 7af18705-b692-5499-ba87-964866c6ad20
+		summarizeBy: sum
+		sourceColumn: turnover_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column vacancy_count
+		dataType: int64
+		formatString: 0
+		lineageTag: c1dfdad5-33d4-51a7-832d-e9e90b97a90e
+		summarizeBy: sum
+		sourceColumn: vacancy_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column scheduled_hours
+		dataType: double
+		lineageTag: 5c8bc454-32d4-5162-a5fb-f12d87d6bd1b
+		summarizeBy: sum
+		sourceColumn: scheduled_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	column worked_hours
+		dataType: double
+		lineageTag: e9126c18-ae9d-5ea7-91e2-c25a85b56874
+		summarizeBy: sum
+		sourceColumn: worked_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	column overtime_hours
+		dataType: double
+		lineageTag: 4b0f6cfb-1d5a-5402-8663-773ebdd4c0c4
+		summarizeBy: sum
+		sourceColumn: overtime_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	column absence_hours
+		dataType: double
+		lineageTag: 1e3c9a39-af94-54a4-bcc9-7f7013a134a1
+		summarizeBy: sum
+		sourceColumn: absence_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	column payroll_cost
+		dataType: double
+		lineageTag: 66215bce-2227-52f7-8b2e-b6c0e5c4f7ac
+		summarizeBy: sum
+		sourceColumn: payroll_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_warning
+		dataType: boolean
+		lineageTag: b38679af-28c0-5f09-b53b-45d79e846ea1
+		summarizeBy: none
+		sourceColumn: dq_warning
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_anomaly
+		dataType: boolean
+		lineageTag: ec8b3f2a-9188-58eb-927e-253e0b2d7445
+		summarizeBy: none
+		sourceColumn: business_anomaly
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_notes
+		dataType: string
+		lineageTag: b170dacb-81ea-5663-8dce-42cf3ee7874c
+		summarizeBy: none
+		sourceColumn: dq_notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_workforce_monthly' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_fact_workforce_monthly = Source{[Schema="analytics",Item="fact_workforce_monthly"]}[Data]
+				in
+				    analytics_fact_workforce_monthly
+
+	annotation PBI_ResultType = Table

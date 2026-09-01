@@ -1,0 +1,63 @@
+table 'analytics dim_budget_scenario'
+	lineageTag: 048b2509-dd8b-5fd0-a7db-c5da81f53df6
+
+	column budget_scenario_key
+		dataType: int64
+		formatString: 0
+		lineageTag: bdbb29c7-0701-5737-b24b-cf3c28800ca5
+		summarizeBy: none
+		sourceColumn: budget_scenario_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column budget_scenario_code
+		dataType: string
+		lineageTag: d2e24c31-790d-5ab1-b9f9-6099f6c4cab0
+		summarizeBy: none
+		sourceColumn: budget_scenario_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column budget_scenario_name
+		dataType: string
+		lineageTag: 3e70537d-1f9d-5ade-8c7f-e0180ac2d218
+		summarizeBy: none
+		sourceColumn: budget_scenario_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column scenario_type
+		dataType: string
+		lineageTag: a2be35e8-e219-5b56-b0c1-2b775c335177
+		summarizeBy: none
+		sourceColumn: scenario_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_order
+		dataType: int64
+		formatString: 0
+		lineageTag: bd21967f-b189-524e-896f-9abc1758c9ea
+		summarizeBy: sum
+		sourceColumn: display_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		lineageTag: 270beb4d-6dde-5450-a921-75ccdb063082
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_budget_scenario' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_budget_scenario = Source{[Schema="analytics",Item="dim_budget_scenario"]}[Data]
+				in
+				    analytics_dim_budget_scenario
+
+	annotation PBI_ResultType = Table

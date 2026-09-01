@@ -1,0 +1,7 @@
+"incident_category_key","incident_category_code","incident_category_name","category_group","default_priority","is_active"
+"1","APPLICATION","Application","Software","P3","True"
+"2","INFRA","Infrastructure","Platform","P3","True"
+"3","NETWORK","Network","Connectivity","P2","True"
+"4","ACCESS","Access and Identity","Security","P3","True"
+"5","INTEGRATION","Integration","Interface","P3","True"
+"6","DATA_REPORT","Data and Reporting","Analytics","P4","True"

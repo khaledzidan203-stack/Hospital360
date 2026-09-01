@@ -1,0 +1,4 @@
+"budget_scenario_key","budget_scenario_code","budget_scenario_name","scenario_type","display_order","is_active"
+"1","ORIGINAL","Original Budget","Approved","1","True"
+"2","FORECAST","Rolling Forecast","Rolling Forecast","2","True"
+"3","STRETCH","Stretch Target","Target","3","True"

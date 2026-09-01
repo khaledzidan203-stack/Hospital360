@@ -319,3 +319,147 @@ relationship 06045ef3-89b8-4e6f-80c5-4d88be8354f9
 
 	annotation PBI_IsFromSource = FS
 
+relationship 60520973-c247-57c3-949a-610ae1f2d337
+	fromColumn: 'analytics fact_finance_monthly'.month_start_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3171a388-7729-5bef-b396-3f5483de029d
+	fromColumn: 'analytics fact_finance_monthly'.organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship f0b491d4-ff35-57f7-a426-d4d1d90d2840
+	fromColumn: 'analytics fact_finance_monthly'.department_key
+	toColumn: 'analytics dim_department'.department_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3ed40412-dcb9-5e32-9f3f-d01bb4804911
+	fromColumn: 'analytics fact_finance_monthly'.cost_category_key
+	toColumn: 'analytics dim_cost_category'.cost_category_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5f502ec5-b0fc-5e63-998b-7dd2c7ca0e51
+	fromColumn: 'analytics fact_budget_monthly'.month_start_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship f27ef91a-7ba3-51f3-9a40-7b1d2f704bcb
+	fromColumn: 'analytics fact_budget_monthly'.organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 1975bfdd-97af-5210-a5ce-8a5076732803
+	fromColumn: 'analytics fact_budget_monthly'.department_key
+	toColumn: 'analytics dim_department'.department_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship aec222e5-799c-57fe-872b-3895814474d3
+	fromColumn: 'analytics fact_budget_monthly'.budget_scenario_key
+	toColumn: 'analytics dim_budget_scenario'.budget_scenario_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 377508e1-8e79-5b8b-b1d7-d5cbe8d08b3d
+	fromColumn: 'analytics fact_workforce_monthly'.month_start_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 198f59f2-ec02-5035-b38f-9392971af30e
+	fromColumn: 'analytics fact_workforce_monthly'.organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 08e442d5-c5cb-5f8c-aaf6-2e3524ee9abf
+	fromColumn: 'analytics fact_workforce_monthly'.department_key
+	toColumn: 'analytics dim_department'.department_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship fdd50775-b05f-54dd-8fe4-733b155c7c91
+	fromColumn: 'analytics fact_workforce_monthly'.employee_role_key
+	toColumn: 'analytics dim_employee_role'.employee_role_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 080a91db-5cc5-5ddd-9420-de315c7161d7
+	fromColumn: 'analytics fact_operations_daily'.date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a14f99a7-0821-5208-be7b-0744c6a9702b
+	fromColumn: 'analytics fact_operations_daily'.organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 56b4317e-891f-5b2b-b68f-ef2b27d31f00
+	fromColumn: 'analytics fact_operations_daily'.department_key
+	toColumn: 'analytics dim_department'.department_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 075b2934-1de7-5657-ad24-710e821c4dd4
+	fromColumn: 'analytics fact_it_incident'.opened_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5e1bc4fa-0a5a-5367-bcbd-641bef22841d
+	isActive: false
+	fromColumn: 'analytics fact_it_incident'.resolved_date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship decf6f0b-d42b-53cb-80a7-0d9a6875c027
+	fromColumn: 'analytics fact_it_incident'.organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e332d86b-9862-5284-b336-ee94ee0f6a23
+	fromColumn: 'analytics fact_it_incident'.department_key
+	toColumn: 'analytics dim_department'.department_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 16f29bc8-4a82-5dbc-b128-e3a96857744f
+	fromColumn: 'analytics fact_it_incident'.it_system_key
+	toColumn: 'analytics dim_it_system'.it_system_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e12b1777-19fb-5037-bbff-645409be5f06
+	fromColumn: 'analytics fact_it_incident'.incident_category_key
+	toColumn: 'analytics dim_incident_category'.incident_category_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5232c98d-7f50-5fd0-9709-f5819192206d
+	fromColumn: 'analytics fact_it_system_daily'.date_key
+	toColumn: 'analytics dim_date'.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 84b14d78-52fa-50ef-9ea3-13c60a40ce69
+	fromColumn: 'analytics fact_it_system_daily'.organization_key
+	toColumn: 'analytics dim_organization'.organization_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a5407a63-3c06-5439-856c-9866cc3b3132
+	fromColumn: 'analytics fact_it_system_daily'.it_system_key
+	toColumn: 'analytics dim_it_system'.it_system_key
+
+	annotation PBI_IsFromSource = FS

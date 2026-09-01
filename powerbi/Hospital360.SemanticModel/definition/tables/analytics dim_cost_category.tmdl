@@ -1,0 +1,71 @@
+table 'analytics dim_cost_category'
+	lineageTag: d98d3489-2f1e-511d-b1cb-5d644f5701c6
+
+	column cost_category_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 3da63ac9-d712-5264-b62b-358a76d7162b
+		summarizeBy: none
+		sourceColumn: cost_category_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_category_code
+		dataType: string
+		lineageTag: 08320634-e0dd-58b7-9af1-30728c95e2fe
+		summarizeBy: none
+		sourceColumn: cost_category_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_category_name
+		dataType: string
+		lineageTag: 6869b83d-c924-50a7-9a73-0df2f2434947
+		summarizeBy: none
+		sourceColumn: cost_category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_behavior
+		dataType: string
+		lineageTag: 4c1b3f85-9dd8-54e7-8fa8-1afd8d2fdf0d
+		summarizeBy: none
+		sourceColumn: cost_behavior
+
+		annotation SummarizationSetBy = Automatic
+
+	column payroll_flag
+		dataType: boolean
+		lineageTag: 662fb894-7e14-5cf7-85eb-a6ce6154d91a
+		summarizeBy: none
+		sourceColumn: payroll_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 87101955-8295-5eea-86b0-9a905213851b
+		summarizeBy: sum
+		sourceColumn: display_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		lineageTag: a3c54f9a-583a-5ab6-9b3a-1a3188be7663
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_cost_category' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_cost_category = Source{[Schema="analytics",Item="dim_cost_category"]}[Data]
+				in
+				    analytics_dim_cost_category
+
+	annotation PBI_ResultType = Table

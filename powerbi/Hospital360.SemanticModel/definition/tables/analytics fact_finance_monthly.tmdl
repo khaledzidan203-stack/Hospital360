@@ -1,0 +1,180 @@
+table 'analytics fact_finance_monthly'
+	lineageTag: 90ab1f5c-d570-51e6-b44b-8a09aa25d8a4
+
+	column finance_monthly_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ff7a5e3-b010-5b0f-bf04-970447205082
+		summarizeBy: none
+		sourceColumn: finance_monthly_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_start_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 40cdb368-880c-58a2-90f8-0309ce86b31b
+		summarizeBy: none
+		sourceColumn: month_start_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: b2a06cb1-3d28-5142-8e97-b427ec59719d
+		summarizeBy: none
+		sourceColumn: organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_key
+		dataType: int64
+		formatString: 0
+		lineageTag: ce271c88-a736-59a2-a81f-a49587337e9f
+		summarizeBy: none
+		sourceColumn: department_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_category_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f800858e-877f-5a07-82b8-40017f098dbe
+		summarizeBy: none
+		sourceColumn: cost_category_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column operating_revenue
+		dataType: double
+		lineageTag: f3c84f71-8a4a-526a-acdf-e2ac1b0aa9be
+		summarizeBy: sum
+		sourceColumn: operating_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column operating_cost
+		dataType: double
+		lineageTag: 281a94a8-4bba-561f-a312-88f45d59333f
+		summarizeBy: sum
+		sourceColumn: operating_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column fixed_cost_amount
+		dataType: double
+		lineageTag: a1693cea-63e4-55f7-94f0-4dd9eafbde4d
+		summarizeBy: sum
+		sourceColumn: fixed_cost_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable_cost_amount
+		dataType: double
+		lineageTag: 0d1a1b30-dccd-5410-9f4b-16987bb57317
+		summarizeBy: sum
+		sourceColumn: variable_cost_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column allocated_shared_cost_amount
+		dataType: double
+		lineageTag: c6abdda6-a753-5fd3-be1b-c04364a24ed6
+		summarizeBy: sum
+		sourceColumn: allocated_shared_cost_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column payroll_cost
+		dataType: double
+		lineageTag: 1d11cadf-9297-5159-be04-42d8525fdfbb
+		summarizeBy: sum
+		sourceColumn: payroll_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplies_cost
+		dataType: double
+		lineageTag: 4056b301-5a66-5072-b665-49abee73d96c
+		summarizeBy: sum
+		sourceColumn: supplies_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column medication_cost
+		dataType: double
+		lineageTag: 2af21d16-6f92-57ab-96ea-54bc94fd4d4c
+		summarizeBy: sum
+		sourceColumn: medication_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column facility_cost
+		dataType: double
+		lineageTag: 78999319-731e-532a-8f33-00b9222266ae
+		summarizeBy: sum
+		sourceColumn: facility_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column technology_other_cost
+		dataType: double
+		lineageTag: 25e95c23-3b6a-5e26-ae65-c8c44b9f8871
+		summarizeBy: sum
+		sourceColumn: technology_other_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column driver_encounter_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 4dd5fc52-5beb-5b09-8b55-29a0f8afb112
+		summarizeBy: sum
+		sourceColumn: driver_encounter_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column driver_procedure_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b3cac22-09d2-5521-8eb6-609692bc7005
+		summarizeBy: sum
+		sourceColumn: driver_procedure_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_warning
+		dataType: boolean
+		lineageTag: 648c370f-4516-5da1-ab7a-9b7690082e07
+		summarizeBy: none
+		sourceColumn: dq_warning
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_anomaly
+		dataType: boolean
+		lineageTag: 6149aebe-69f1-55d6-8d71-244068db1c24
+		summarizeBy: none
+		sourceColumn: business_anomaly
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_notes
+		dataType: string
+		lineageTag: 75237554-d791-5520-9576-1d8470547008
+		summarizeBy: none
+		sourceColumn: dq_notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_finance_monthly' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_fact_finance_monthly = Source{[Schema="analytics",Item="fact_finance_monthly"]}[Data]
+				in
+				    analytics_fact_finance_monthly
+
+	annotation PBI_ResultType = Table

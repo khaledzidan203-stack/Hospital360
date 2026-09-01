@@ -1,0 +1,119 @@
+table 'analytics dim_department'
+	lineageTag: 74ac13c9-05e8-5184-814e-6c9294381f30
+
+	column department_key
+		dataType: int64
+		formatString: 0
+		lineageTag: ccf80ca2-7603-55a7-9411-ad7fff13fae4
+		summarizeBy: none
+		sourceColumn: department_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_code
+		dataType: string
+		lineageTag: eb2c7a64-53f4-5911-b30c-38315a21eb88
+		summarizeBy: none
+		sourceColumn: department_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_name
+		dataType: string
+		lineageTag: 3c70e5b7-fd9d-5313-8d08-db311723868a
+		summarizeBy: none
+		sourceColumn: department_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_type
+		dataType: string
+		lineageTag: 1cb84330-4093-5567-8bfd-b060b1b54edf
+		summarizeBy: none
+		sourceColumn: department_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column clinical_flag
+		dataType: boolean
+		lineageTag: d72d20e6-86d2-55fe-9fc6-126f1d96007e
+		summarizeBy: none
+		sourceColumn: clinical_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column capacity_managed_flag
+		dataType: boolean
+		lineageTag: 3828a347-38a5-5002-bfe1-b899a3a57c3e
+		summarizeBy: none
+		sourceColumn: capacity_managed_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column bed_applicable_flag
+		dataType: boolean
+		lineageTag: ba3d408d-0334-5b4b-9655-a2ef6d1d56f7
+		summarizeBy: none
+		sourceColumn: bed_applicable_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 252ad133-6d73-5ae3-883e-a9ff0e64f6d7
+		summarizeBy: none
+		sourceColumn: organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column organization_id
+		dataType: string
+		lineageTag: ce32e804-99b4-522f-86cb-a84723ad4a4a
+		summarizeBy: none
+		sourceColumn: organization_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column effective_start_date
+		dataType: dateTime
+		lineageTag: 8e75b314-2923-5555-85a6-8734ad8608dd
+		summarizeBy: none
+		sourceColumn: effective_start_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column effective_end_date
+		dataType: dateTime
+		lineageTag: ddd0a510-f606-57db-9bfa-37c81e3746cc
+		summarizeBy: none
+		sourceColumn: effective_end_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		lineageTag: b35313c6-4403-5686-8881-6d34ce940f15
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_system
+		dataType: string
+		lineageTag: cb513f2d-0d29-587d-bd08-dbf63c37391e
+		summarizeBy: none
+		sourceColumn: source_system
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_department' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_department = Source{[Schema="analytics",Item="dim_department"]}[Data]
+				in
+				    analytics_dim_department
+
+	annotation PBI_ResultType = Table

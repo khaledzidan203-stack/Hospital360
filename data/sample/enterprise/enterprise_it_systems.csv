@@ -1,0 +1,7 @@
+"it_system_key","it_system_code","it_system_name","system_domain","criticality_tier","target_uptime_pct","default_sla_minutes","is_active"
+"1","EHR","Electronic Health Record","Clinical","Tier 1","99.9","120","True"
+"2","PACS","Imaging and PACS","Clinical","Tier 1","99.8","180","True"
+"3","LIS","Laboratory Information System","Clinical","Tier 1","99.8","180","True"
+"4","PHARM","Pharmacy System","Clinical","Tier 1","99.8","180","True"
+"5","ERP","Enterprise Resource Planning","Administrative","Tier 2","99.5","240","True"
+"6","DATA","Analytics and Data Platform","Analytics","Tier 2","99.5","240","True"

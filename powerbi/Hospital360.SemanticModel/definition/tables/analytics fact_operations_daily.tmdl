@@ -1,0 +1,245 @@
+table 'analytics fact_operations_daily'
+	lineageTag: 4813d3ce-88cc-5232-8eb0-7cb2bb088e82
+
+	column operations_daily_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e3c2b6b-23c0-5b45-b921-e49645b4331d
+		summarizeBy: none
+		sourceColumn: operations_daily_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a6e597a-7c90-546d-89eb-82a5101a1ec7
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f074a777-d291-5593-8379-ed77ed555e41
+		summarizeBy: none
+		sourceColumn: organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_key
+		dataType: int64
+		formatString: 0
+		lineageTag: cf73399c-043a-580f-9201-5df51bd11d38
+		summarizeBy: none
+		sourceColumn: department_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column licensed_beds
+		dataType: int64
+		formatString: 0
+		lineageTag: 530c3c5c-0925-52f3-8946-d3bd330f0738
+		summarizeBy: sum
+		sourceColumn: licensed_beds
+
+		annotation SummarizationSetBy = Automatic
+
+	column available_beds
+		dataType: int64
+		formatString: 0
+		lineageTag: b60a071e-1fa3-5148-a1a5-a1ab53f3d47b
+		summarizeBy: sum
+		sourceColumn: available_beds
+
+		annotation SummarizationSetBy = Automatic
+
+	column occupied_beds
+		dataType: int64
+		formatString: 0
+		lineageTag: e72ec14f-7fbb-5af0-b46a-a68832347fcb
+		summarizeBy: sum
+		sourceColumn: occupied_beds
+
+		annotation SummarizationSetBy = Automatic
+
+	column available_bed_days
+		dataType: double
+		lineageTag: 44c1ce79-9c53-5735-8704-cfd216fc8dd7
+		summarizeBy: sum
+		sourceColumn: available_bed_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column occupied_bed_days
+		dataType: double
+		lineageTag: 4c3d2205-a3da-5b6f-b0f7-f7e99a4e4960
+		summarizeBy: sum
+		sourceColumn: occupied_bed_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column admissions
+		dataType: int64
+		formatString: 0
+		lineageTag: 756bbe86-7934-56af-aa32-0446eb9bc327
+		summarizeBy: sum
+		sourceColumn: admissions
+
+		annotation SummarizationSetBy = Automatic
+
+	column discharges
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a23ee91-79e8-55d1-9aee-681ffeefe961
+		summarizeBy: sum
+		sourceColumn: discharges
+
+		annotation SummarizationSetBy = Automatic
+
+	column encounter_count
+		dataType: int64
+		formatString: 0
+		lineageTag: beb2236b-74ef-5b3a-8285-5efdf60655cf
+		summarizeBy: sum
+		sourceColumn: encounter_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_count
+		dataType: int64
+		formatString: 0
+		lineageTag: aed9b350-c044-559c-aca5-e65fcd529c2f
+		summarizeBy: sum
+		sourceColumn: procedure_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column appointments_scheduled
+		dataType: int64
+		formatString: 0
+		lineageTag: fad3a181-1918-52c4-94cb-efc3e740b38a
+		summarizeBy: sum
+		sourceColumn: appointments_scheduled
+
+		annotation SummarizationSetBy = Automatic
+
+	column appointments_completed
+		dataType: int64
+		formatString: 0
+		lineageTag: 47491392-97f8-556d-ad17-7eecb3feef95
+		summarizeBy: sum
+		sourceColumn: appointments_completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column wait_minutes_total
+		dataType: double
+		lineageTag: 91e90fbf-4817-58b9-909a-32451086d900
+		summarizeBy: sum
+		sourceColumn: wait_minutes_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column waited_encounter_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 2bf3b721-ea88-5ccc-81a2-329b89565e19
+		summarizeBy: sum
+		sourceColumn: waited_encounter_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column average_waiting_time_minutes
+		dataType: double
+		lineageTag: e506e5a5-b12b-5741-a97e-2e0004789d5a
+		summarizeBy: sum
+		sourceColumn: average_waiting_time_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column length_of_stay_days_total
+		dataType: double
+		lineageTag: fd6520da-9f94-5cc4-b4dd-182b5595eefa
+		summarizeBy: sum
+		sourceColumn: length_of_stay_days_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column discharged_with_los_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f8b9f9c-94e0-5e95-ba01-47608582f10f
+		summarizeBy: sum
+		sourceColumn: discharged_with_los_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column average_length_of_stay
+		dataType: double
+		lineageTag: fade899a-4f64-506a-961c-70b20d065d55
+		summarizeBy: sum
+		sourceColumn: average_length_of_stay
+
+		annotation SummarizationSetBy = Automatic
+
+	column capacity_utilization
+		dataType: double
+		lineageTag: 8c8c6b5d-5372-5b74-afbf-567af4daca29
+		summarizeBy: sum
+		sourceColumn: capacity_utilization
+
+		annotation SummarizationSetBy = Automatic
+
+	column throughput
+		dataType: int64
+		formatString: 0
+		lineageTag: b1a92d2f-6235-5cbe-b323-26ed73cf7329
+		summarizeBy: sum
+		sourceColumn: throughput
+
+		annotation SummarizationSetBy = Automatic
+
+	column overflow_capacity_flag
+		dataType: boolean
+		lineageTag: ad535ae1-a776-505d-aa4a-6079f7976628
+		summarizeBy: none
+		sourceColumn: overflow_capacity_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_warning
+		dataType: boolean
+		lineageTag: b02fbe74-48ba-5128-af15-52420d3d3978
+		summarizeBy: none
+		sourceColumn: dq_warning
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_anomaly
+		dataType: boolean
+		lineageTag: 39316839-6160-5516-ab8a-44a7299d0e61
+		summarizeBy: none
+		sourceColumn: business_anomaly
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_notes
+		dataType: string
+		lineageTag: 54fdfc40-9cbf-5795-bda9-0acde92e9554
+		summarizeBy: none
+		sourceColumn: dq_notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_operations_daily' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_fact_operations_daily = Source{[Schema="analytics",Item="fact_operations_daily"]}[Data]
+				in
+				    analytics_fact_operations_daily
+
+	annotation PBI_ResultType = Table

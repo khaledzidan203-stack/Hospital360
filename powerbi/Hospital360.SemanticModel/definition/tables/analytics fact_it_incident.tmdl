@@ -1,0 +1,208 @@
+table 'analytics fact_it_incident'
+	lineageTag: ffb40136-72a0-529f-9c7f-c7c9bc02f58d
+
+	column it_incident_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 73a6c7b7-1c00-59da-acc6-576b75bdd2f3
+		summarizeBy: none
+		sourceColumn: it_incident_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_id
+		dataType: string
+		lineageTag: d6aebb52-f187-5609-88a6-420472ff20ae
+		summarizeBy: none
+		sourceColumn: incident_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column opened_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 21e3d234-68b9-5a7a-b36d-2c814bfb37f5
+		summarizeBy: none
+		sourceColumn: opened_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column resolved_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: acccdf1f-3780-5477-903a-6bcad0056c54
+		summarizeBy: none
+		sourceColumn: resolved_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 66001e3d-37d5-5835-9d2c-b371c60ad1a4
+		summarizeBy: none
+		sourceColumn: organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 91583f11-c020-58e7-9614-79440aabf9d5
+		summarizeBy: none
+		sourceColumn: department_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column it_system_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 1def9264-b95c-5be9-8a89-6075f414dc0a
+		summarizeBy: none
+		sourceColumn: it_system_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_category_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 22675b4b-fc00-5a9c-939e-8a21fe79ad26
+		summarizeBy: none
+		sourceColumn: incident_category_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column opened_at
+		dataType: dateTime
+		lineageTag: 99f0c24a-66e6-562f-9ac3-6dec97bec2f6
+		summarizeBy: none
+		sourceColumn: opened_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column resolved_at
+		dataType: dateTime
+		lineageTag: 27cdc7ba-45bb-5edf-89b2-6785c31fba3c
+		summarizeBy: none
+		sourceColumn: resolved_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity
+		dataType: string
+		lineageTag: 958fff10-3259-5d98-9deb-53135b673741
+		summarizeBy: none
+		sourceColumn: severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: cc7b9768-91f1-5439-9606-075f558bfc4a
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: 2e3a4da4-1f3f-5537-afa9-2f455b451d78
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column sla_class
+		dataType: string
+		lineageTag: fe11fb2e-ae9e-536f-803e-611390063430
+		summarizeBy: none
+		sourceColumn: sla_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column sla_target_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 7eacaa7e-39f2-5038-be81-7c0b55b2aa66
+		summarizeBy: sum
+		sourceColumn: sla_target_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column resolution_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 9697c3ea-948e-5325-aa86-c49dab8400c5
+		summarizeBy: sum
+		sourceColumn: resolution_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column sla_met_flag
+		dataType: boolean
+		lineageTag: d1fe3471-83e9-5eea-bb05-6322238a3672
+		summarizeBy: none
+		sourceColumn: sla_met_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column downtime_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 05c77b28-1732-5841-9783-9390d3e15150
+		summarizeBy: sum
+		sourceColumn: downtime_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column affected_users
+		dataType: int64
+		formatString: 0
+		lineageTag: 5830c129-fed1-549a-9321-8c4b4945eb50
+		summarizeBy: sum
+		sourceColumn: affected_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_impact_score
+		dataType: double
+		lineageTag: 54f31607-f8ef-56a2-b6c2-18e2336c91b4
+		summarizeBy: sum
+		sourceColumn: business_impact_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_warning
+		dataType: boolean
+		lineageTag: 03a2183b-1668-5bb3-a92b-27d91e0d94da
+		summarizeBy: none
+		sourceColumn: dq_warning
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_anomaly
+		dataType: boolean
+		lineageTag: c54d5833-18b8-5a08-98a1-e691a2891f24
+		summarizeBy: none
+		sourceColumn: business_anomaly
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_notes
+		dataType: string
+		lineageTag: 826ee217-8fb9-5548-8d8d-fe1707d388d9
+		summarizeBy: none
+		sourceColumn: dq_notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_it_incident' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_fact_it_incident = Source{[Schema="analytics",Item="fact_it_incident"]}[Data]
+				in
+				    analytics_fact_it_incident
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,188 @@
+table 'analytics fact_it_system_daily'
+	lineageTag: f750746f-0a8e-5b8c-a5a3-b57598c8eb06
+
+	column it_system_daily_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 79697bab-c792-5fa9-a150-3f7bc68ae794
+		summarizeBy: none
+		sourceColumn: it_system_daily_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 46018000-9d4c-5126-8725-4b67c2ec6360
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 2056f12b-7e3a-52de-8bbd-d016633d0700
+		summarizeBy: none
+		sourceColumn: organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column it_system_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 42145e9a-e987-5035-92c3-63b898f89b54
+		summarizeBy: none
+		sourceColumn: it_system_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column scheduled_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: d7652362-d2ff-580b-8c17-76b3b78e1e1b
+		summarizeBy: sum
+		sourceColumn: scheduled_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column availability_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 58fb2a18-3c53-50ae-bda2-7aa8f83f4c74
+		summarizeBy: sum
+		sourceColumn: availability_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column available_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 37f4bbb0-3340-55be-84e3-01935221b444
+		summarizeBy: sum
+		sourceColumn: available_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column downtime_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a1c9eae-8191-5029-8e80-df90dd49a70f
+		summarizeBy: sum
+		sourceColumn: downtime_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_downtime_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: edf8162d-9189-5e03-a6d7-ca7b609accee
+		summarizeBy: sum
+		sourceColumn: planned_downtime_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column unplanned_downtime_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: d3906c56-f086-516b-96dc-1c2cabcd92b7
+		summarizeBy: sum
+		sourceColumn: unplanned_downtime_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column uptime_pct
+		dataType: double
+		lineageTag: 87b8fd11-76aa-5250-bfd4-b59684822cee
+		summarizeBy: sum
+		sourceColumn: uptime_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 62832b7e-c18b-5830-935e-28aa28e5e1f2
+		summarizeBy: sum
+		sourceColumn: transaction_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column active_users
+		dataType: int64
+		formatString: 0
+		lineageTag: de685281-1824-5aac-9665-0e5c01db8519
+		summarizeBy: sum
+		sourceColumn: active_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column peak_concurrent_users
+		dataType: int64
+		formatString: 0
+		lineageTag: 23ef2179-5d8e-5324-980a-29eec83a9cbf
+		summarizeBy: sum
+		sourceColumn: peak_concurrent_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column response_time_ms
+		dataType: double
+		lineageTag: 39185f37-8f1f-56ea-a27f-b37ca9a8c84b
+		summarizeBy: sum
+		sourceColumn: response_time_ms
+
+		annotation SummarizationSetBy = Automatic
+
+	column error_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 307fc6e8-c29d-575d-ba07-fe2f60370407
+		summarizeBy: sum
+		sourceColumn: error_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 94016b6e-6d33-5274-8ca4-95fcb8496c34
+		summarizeBy: sum
+		sourceColumn: incident_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_warning
+		dataType: boolean
+		lineageTag: b7ad3733-8646-5a3a-8a1a-36c8342ea058
+		summarizeBy: none
+		sourceColumn: dq_warning
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_anomaly
+		dataType: boolean
+		lineageTag: 586a2f37-5da5-5459-a1ab-42bb6905043a
+		summarizeBy: none
+		sourceColumn: business_anomaly
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_notes
+		dataType: string
+		lineageTag: edb0dbac-5c67-52ea-979e-b953de84483d
+		summarizeBy: none
+		sourceColumn: dq_notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_it_system_daily' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_fact_it_system_daily = Source{[Schema="analytics",Item="fact_it_system_daily"]}[Data]
+				in
+				    analytics_fact_it_system_daily
+
+	annotation PBI_ResultType = Table

@@ -395,3 +395,272 @@ table _Measures
 
 	annotation PBI_Id = 108cf5b77233454cb3ecc0ff2c64fbb4
 
+	measure 'Enterprise Revenue' =
+			SUM('analytics fact_finance_monthly'[operating_revenue])
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: 6311e97c-0220-5018-983f-f8f2f7499377
+
+	measure 'Enterprise Operating Cost' =
+			SUM('analytics fact_finance_monthly'[operating_cost])
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: 19072287-a2a3-5299-bd74-d981210baf55
+
+	measure 'Enterprise Operating Margin' =
+			[Enterprise Revenue] - [Enterprise Operating Cost]
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: 3287ec7d-26bd-5fd1-b2c2-a0f161f8fe69
+
+	measure 'Enterprise Operating Margin %' =
+			DIVIDE([Enterprise Operating Margin],[Enterprise Revenue])
+		formatString: 0.00%
+		displayFolder: Enterprise Finance
+		lineageTag: 3843033a-7633-54c2-b39b-107dda095bdc
+
+	measure 'Budget Revenue' =
+			CALCULATE(SUM('analytics fact_budget_monthly'[budget_revenue]),'analytics dim_budget_scenario'[budget_scenario_code]="ORIGINAL")
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: ae3fe06b-f67c-5980-9775-ed00863df8b2
+
+	measure 'Budget Cost' =
+			CALCULATE(SUM('analytics fact_budget_monthly'[budget_operating_cost]),'analytics dim_budget_scenario'[budget_scenario_code]="ORIGINAL")
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: c9ea3f95-4627-52ed-8e8b-66666edc707a
+
+	measure 'Revenue Variance' =
+			[Enterprise Revenue]-[Budget Revenue]
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: 7b66456b-c1fc-5d99-84c4-7dfb926d5009
+
+	measure 'Cost Variance' =
+			[Enterprise Operating Cost]-[Budget Cost]
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: 23f0a636-0fef-5a6a-bd12-60fb659fdb79
+
+	measure 'Budget Variance' =
+			[Enterprise Operating Margin]-([Budget Revenue]-[Budget Cost])
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: df9446de-ff26-540d-9a1a-bdc25855e2c4
+
+	measure 'Budget Variance %' =
+			DIVIDE([Budget Variance],ABS([Budget Revenue]-[Budget Cost]))
+		formatString: 0.00%
+		displayFolder: Enterprise Finance
+		lineageTag: bc6f480f-93ca-555d-bcd8-a28713f912e7
+
+	measure 'Enterprise Cost per Encounter' =
+			DIVIDE([Enterprise Operating Cost],[Enterprise Encounter Volume])
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: 61e74e01-3ef7-568f-a97e-30e1a40b059c
+
+	measure 'Enterprise Revenue per Encounter' =
+			DIVIDE([Enterprise Revenue],[Enterprise Encounter Volume])
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: f0a16872-568b-5208-8297-ad67f836be29
+
+	measure 'Enterprise Payroll Cost' =
+			SUM('analytics fact_finance_monthly'[payroll_cost])
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: 5c7638f4-68c0-5b53-a811-b1ecb20fb928
+
+	measure 'Enterprise Payroll Cost %' =
+			DIVIDE([Enterprise Payroll Cost],[Enterprise Operating Cost])
+		formatString: 0.00%
+		displayFolder: Enterprise Finance
+		lineageTag: 9266d5eb-9242-5181-a6c4-7a0b7c8bcf91
+
+	measure 'Enterprise Supplies Cost' =
+			SUM('analytics fact_finance_monthly'[supplies_cost])
+		formatString: $#,0.00
+		displayFolder: Enterprise Finance
+		lineageTag: 5a8c17b5-ec0a-5355-ba3b-c43d583e7138
+
+	measure 'Department Cost Share' =
+			DIVIDE([Enterprise Operating Cost],CALCULATE([Enterprise Operating Cost],REMOVEFILTERS('analytics dim_department')))
+		formatString: 0.00%
+		displayFolder: Enterprise Finance
+		lineageTag: 59bbf272-3fab-5778-b249-59f3a5fd8a1e
+
+	measure 'Enterprise Headcount' =
+			VAR k=MAX('analytics fact_workforce_monthly'[month_start_date_key]) RETURN CALCULATE(SUM('analytics fact_workforce_monthly'[headcount]),'analytics fact_workforce_monthly'[month_start_date_key]=k)
+		formatString: #,0
+		displayFolder: Enterprise Workforce
+		lineageTag: 27cff209-fff6-5e8b-8054-4d3cb7c33b6e
+
+	measure 'Enterprise FTE' =
+			VAR k=MAX('analytics fact_workforce_monthly'[month_start_date_key]) RETURN CALCULATE(SUM('analytics fact_workforce_monthly'[fte]),'analytics fact_workforce_monthly'[month_start_date_key]=k)
+		formatString: #,0.00
+		displayFolder: Enterprise Workforce
+		lineageTag: d486241c-82b6-5c78-81b5-e92021d679d9
+
+	measure 'Workforce Payroll Cost' =
+			SUM('analytics fact_workforce_monthly'[payroll_cost])
+		formatString: $#,0.00
+		displayFolder: Enterprise Workforce
+		lineageTag: 74427c9a-4e7d-5510-a2b0-524d88588fb4
+
+	measure 'Overtime Hours' =
+			SUM('analytics fact_workforce_monthly'[overtime_hours])
+		formatString: #,0.00
+		displayFolder: Enterprise Workforce
+		lineageTag: 4f61149c-3d7d-5481-b4a9-2f1e63d6ff2a
+
+	measure 'Absence Rate' =
+			DIVIDE(SUM('analytics fact_workforce_monthly'[absence_hours]),SUM('analytics fact_workforce_monthly'[scheduled_hours]))
+		formatString: 0.00%
+		displayFolder: Enterprise Workforce
+		lineageTag: 7b53993f-93f3-5caf-9e04-f69cbc382723
+
+	measure 'Turnover Rate' =
+			DIVIDE(SUM('analytics fact_workforce_monthly'[turnover_count]),SUM('analytics fact_workforce_monthly'[average_headcount]))
+		formatString: 0.00%
+		displayFolder: Enterprise Workforce
+		lineageTag: 71e55327-f275-5192-8c48-217b9e4808f4
+
+	measure 'Vacancy Count' =
+			SUM('analytics fact_workforce_monthly'[vacancy_count])
+		formatString: #,0
+		displayFolder: Enterprise Workforce
+		lineageTag: 4f3e337a-c01d-5b82-b66f-0adf9175507a
+
+	measure 'Encounters per FTE' =
+			DIVIDE([Enterprise Encounter Volume],SUM('analytics fact_workforce_monthly'[average_fte]))
+		formatString: #,0.00
+		displayFolder: Enterprise Workforce
+		lineageTag: 38c340b2-83e9-59a3-95f4-f0659d749a24
+
+	measure 'Payroll Cost per FTE' =
+			DIVIDE([Workforce Payroll Cost],SUM('analytics fact_workforce_monthly'[average_fte]))
+		formatString: $#,0.00
+		displayFolder: Enterprise Workforce
+		lineageTag: 3626a1f2-9c9b-58fd-8506-53cf9a29fb82
+
+	measure 'Admissions' =
+			SUM('analytics fact_operations_daily'[admissions])
+		formatString: #,0
+		displayFolder: Enterprise Operations
+		lineageTag: fe42f9ab-22af-5f26-bc30-21cbaa33a7b2
+
+	measure 'Discharges' =
+			SUM('analytics fact_operations_daily'[discharges])
+		formatString: #,0
+		displayFolder: Enterprise Operations
+		lineageTag: f03bfe82-90c6-5a18-89b4-993377ce0b70
+
+	measure 'Available Beds' =
+			AVERAGE('analytics fact_operations_daily'[available_beds])
+		formatString: #,0.00
+		displayFolder: Enterprise Operations
+		lineageTag: e9f7c8d9-6069-5448-8da1-cacfaa4e754f
+
+	measure 'Occupied Beds' =
+			AVERAGE('analytics fact_operations_daily'[occupied_beds])
+		formatString: #,0.00
+		displayFolder: Enterprise Operations
+		lineageTag: c04ca436-97a0-5ec0-bcd3-4dfc195f85ae
+
+	measure 'Occupancy Rate' =
+			DIVIDE(SUM('analytics fact_operations_daily'[occupied_bed_days]),SUM('analytics fact_operations_daily'[available_bed_days]))
+		formatString: 0.00%
+		displayFolder: Enterprise Operations
+		lineageTag: 4ff0db5a-62ea-5051-a612-041e6a28d173
+
+	measure 'Average Length of Stay' =
+			DIVIDE(SUM('analytics fact_operations_daily'[length_of_stay_days_total]),SUM('analytics fact_operations_daily'[discharged_with_los_count]))
+		formatString: #,0.00
+		displayFolder: Enterprise Operations
+		lineageTag: 15969784-06cd-5572-a4cc-0475438c5b67
+
+	measure 'Bed Turnover' =
+			DIVIDE([Discharges],[Available Beds])
+		formatString: #,0.00
+		displayFolder: Enterprise Operations
+		lineageTag: 3b539bf8-59da-505a-8e49-0b2dc7d72f1c
+
+	measure 'Waiting Time' =
+			DIVIDE(SUM('analytics fact_operations_daily'[wait_minutes_total]),SUM('analytics fact_operations_daily'[waited_encounter_count]))
+		formatString: #,0.00
+		displayFolder: Enterprise Operations
+		lineageTag: 7ef41491-4bd3-5df0-a520-365f533a38c8
+
+	measure 'Appointment Completion %' =
+			DIVIDE(SUM('analytics fact_operations_daily'[appointments_completed]),SUM('analytics fact_operations_daily'[appointments_scheduled]))
+		formatString: 0.00%
+		displayFolder: Enterprise Operations
+		lineageTag: 646b95d0-fcbf-5fe5-9dc7-173c534708c5
+
+	measure 'Enterprise Throughput' =
+			SUM('analytics fact_operations_daily'[throughput])
+		formatString: #,0
+		displayFolder: Enterprise Operations
+		lineageTag: 70eb7a01-b9e5-54fe-bebd-3b4f4d988ebf
+
+	measure 'Enterprise Encounter Volume' =
+			SUM('analytics fact_operations_daily'[encounter_count])
+		formatString: #,0
+		displayFolder: Enterprise Operations
+		lineageTag: 041a4087-0715-5cfa-91cd-d5fd1e74d3aa
+
+	measure 'Incident Count' =
+			COUNTROWS('analytics fact_it_incident')
+		formatString: #,0
+		displayFolder: Enterprise IT
+		lineageTag: 335cf0a6-4a52-5aa9-a24c-f941df707f73
+
+	measure 'Critical Incidents' =
+			CALCULATE([Incident Count],'analytics fact_it_incident'[severity]="P1")
+		formatString: #,0
+		displayFolder: Enterprise IT
+		lineageTag: f05beb6e-b06b-523f-b38c-8841644a875d
+
+	measure 'Uptime %' =
+			DIVIDE(SUM('analytics fact_it_system_daily'[available_minutes]),SUM('analytics fact_it_system_daily'[scheduled_minutes]))
+		formatString: 0.00%
+		displayFolder: Enterprise IT
+		lineageTag: 6ed97ca9-88c0-56dd-9734-feca8e10dd1c
+
+	measure 'Downtime Minutes' =
+			SUM('analytics fact_it_system_daily'[downtime_minutes])
+		formatString: #,0
+		displayFolder: Enterprise IT
+		lineageTag: 8b536812-c139-54c8-aa36-ae7fa1b0e286
+
+	measure 'SLA Compliance %' =
+			DIVIDE(CALCULATE([Incident Count],'analytics fact_it_incident'[sla_met_flag]=TRUE()),CALCULATE([Incident Count],NOT ISBLANK('analytics fact_it_incident'[resolved_at])))
+		formatString: 0.00%
+		displayFolder: Enterprise IT
+		lineageTag: 5630c46e-fb5b-5d4b-af32-6c4d1e70638b
+
+	measure 'Mean Resolution Time' =
+			AVERAGE('analytics fact_it_incident'[resolution_minutes])
+		formatString: #,0.00
+		displayFolder: Enterprise IT
+		lineageTag: 18786b15-5bf2-5cb4-95e0-ced1e20c0a16
+
+	measure 'IT Error Rate' =
+			DIVIDE(SUM('analytics fact_it_system_daily'[error_count]),SUM('analytics fact_it_system_daily'[transaction_count]))
+		formatString: 0.00%
+		displayFolder: Enterprise IT
+		lineageTag: 2fed78fa-06e2-513e-8860-d1c377d5560c
+
+	measure 'System Transaction Volume' =
+			SUM('analytics fact_it_system_daily'[transaction_count])
+		formatString: #,0
+		displayFolder: Enterprise IT
+		lineageTag: efb6f0e8-3821-58bc-ad1b-2b12e5eb2ee3
+
+	measure 'Incidents per 10K Transactions' =
+			DIVIDE([Incident Count]*10000,[System Transaction Volume])
+		formatString: #,0.00
+		displayFolder: Enterprise IT
+		lineageTag: 29d8e6d0-826b-5c35-8953-a222505e7363

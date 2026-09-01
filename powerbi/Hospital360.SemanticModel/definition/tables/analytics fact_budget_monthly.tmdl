@@ -1,0 +1,130 @@
+table 'analytics fact_budget_monthly'
+	lineageTag: 900de32e-4bd5-5376-9905-11a8f9fa0500
+
+	column budget_monthly_key
+		dataType: int64
+		formatString: 0
+		lineageTag: e108c296-3567-50c1-978c-ad59da8359de
+		summarizeBy: none
+		sourceColumn: budget_monthly_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_start_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 7854755b-c99b-5492-afc3-3201cba6d340
+		summarizeBy: none
+		sourceColumn: month_start_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column organization_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 067ef8ba-36b9-5223-8c57-5eb3ecebfb34
+		summarizeBy: none
+		sourceColumn: organization_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 9fac7d6a-d7cc-5fad-a388-2a3f520666a3
+		summarizeBy: none
+		sourceColumn: department_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column budget_scenario_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 0726b96d-b98f-5422-b1c7-82cd4aee71da
+		summarizeBy: none
+		sourceColumn: budget_scenario_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column budget_revenue
+		dataType: double
+		lineageTag: fa511a20-eb6a-5799-a6e7-caaafd986fd3
+		summarizeBy: sum
+		sourceColumn: budget_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column budget_operating_cost
+		dataType: double
+		lineageTag: 931052a9-8382-5190-ba2a-ca1232025363
+		summarizeBy: sum
+		sourceColumn: budget_operating_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column budget_payroll_cost
+		dataType: double
+		lineageTag: 5ae8d71c-bbc1-51f6-be61-cabdfaa87752
+		summarizeBy: sum
+		sourceColumn: budget_payroll_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column budget_capital_amount
+		dataType: double
+		lineageTag: a8792093-f3b8-55ba-85c5-f21dd5a7d3da
+		summarizeBy: sum
+		sourceColumn: budget_capital_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column budget_fte
+		dataType: double
+		lineageTag: 869ff1dd-bd65-5bbc-9970-6f252b0e74b0
+		summarizeBy: sum
+		sourceColumn: budget_fte
+
+		annotation SummarizationSetBy = Automatic
+
+	column assumption_version
+		dataType: string
+		lineageTag: d41016ac-b306-570d-a627-73cab1299cd4
+		summarizeBy: none
+		sourceColumn: assumption_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_warning
+		dataType: boolean
+		lineageTag: b3a93243-9ae6-578d-81c8-b86f79ea75d1
+		summarizeBy: none
+		sourceColumn: dq_warning
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_anomaly
+		dataType: boolean
+		lineageTag: 047a99f2-5fec-5aee-a3f5-1b02bebcc8f5
+		summarizeBy: none
+		sourceColumn: business_anomaly
+
+		annotation SummarizationSetBy = Automatic
+
+	column dq_notes
+		dataType: string
+		lineageTag: ce0a8181-b490-5d0e-9275-6748a67740a3
+		summarizeBy: none
+		sourceColumn: dq_notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_budget_monthly' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_fact_budget_monthly = Source{[Schema="analytics",Item="fact_budget_monthly"]}[Data]
+				in
+				    analytics_fact_budget_monthly
+
+	annotation PBI_ResultType = Table

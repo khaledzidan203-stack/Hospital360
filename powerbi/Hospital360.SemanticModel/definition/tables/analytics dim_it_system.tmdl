@@ -1,0 +1,79 @@
+table 'analytics dim_it_system'
+	lineageTag: 1d404c10-ee89-5786-bf5c-44658df1991e
+
+	column it_system_key
+		dataType: int64
+		formatString: 0
+		lineageTag: bb946d46-faa9-51aa-b840-6e881459d75b
+		summarizeBy: none
+		sourceColumn: it_system_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column it_system_code
+		dataType: string
+		lineageTag: 5c6c87a9-8a98-59b6-a326-b837b1f7b471
+		summarizeBy: none
+		sourceColumn: it_system_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column it_system_name
+		dataType: string
+		lineageTag: d28c053e-5841-5bf4-b014-1369d0966df4
+		summarizeBy: none
+		sourceColumn: it_system_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column system_domain
+		dataType: string
+		lineageTag: fdab571c-75a3-5dc4-9c5a-eab3612db5b5
+		summarizeBy: none
+		sourceColumn: system_domain
+
+		annotation SummarizationSetBy = Automatic
+
+	column criticality_tier
+		dataType: string
+		lineageTag: 6d4d4465-e45b-5f19-bc54-3b207bcaeb3c
+		summarizeBy: none
+		sourceColumn: criticality_tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_uptime_pct
+		dataType: double
+		lineageTag: 2deb69db-5eef-55cc-9bf0-33f8d1a0a411
+		summarizeBy: sum
+		sourceColumn: target_uptime_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column default_sla_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 129d16ca-1031-534b-b3b6-4966f09cffe0
+		summarizeBy: sum
+		sourceColumn: default_sla_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		lineageTag: 9e8974ec-04c3-50e2-85ef-c21d7b97fb4b
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_it_system' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_it_system = Source{[Schema="analytics",Item="dim_it_system"]}[Data]
+				in
+				    analytics_dim_it_system
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,7 @@
+"cost_category_key","cost_category_code","cost_category_name","cost_behavior","payroll_flag","display_order","is_active"
+"1","REVENUE","Operating Revenue","Revenue","False","1","True"
+"2","PAYROLL","Payroll","Mixed","True","2","True"
+"3","SUPPLIES","Clinical Supplies","Variable","False","3","True"
+"4","MEDICATION","Medications","Variable","False","4","True"
+"5","FACILITY","Facilities","Fixed","False","5","True"
+"6","TECH_OTHER","Technology & Other","Mixed","False","6","True"

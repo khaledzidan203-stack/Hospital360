@@ -1,0 +1,62 @@
+table 'analytics dim_incident_category'
+	lineageTag: 0f92609a-bb1b-5b74-831d-74cb0451f989
+
+	column incident_category_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f0766f82-e293-5998-a17f-f9f2d048e2a3
+		summarizeBy: none
+		sourceColumn: incident_category_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_category_code
+		dataType: string
+		lineageTag: b28875cd-daa6-5513-afa3-5e00c746fa69
+		summarizeBy: none
+		sourceColumn: incident_category_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_category_name
+		dataType: string
+		lineageTag: 83afbca3-85ef-5592-bd01-7a9e630be22d
+		summarizeBy: none
+		sourceColumn: incident_category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_group
+		dataType: string
+		lineageTag: 2c5f1674-63d3-5606-b4f8-c9d417f7503f
+		summarizeBy: none
+		sourceColumn: category_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column default_priority
+		dataType: string
+		lineageTag: ea4b626c-b57b-5752-80c7-a24737f5fc29
+		summarizeBy: none
+		sourceColumn: default_priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		lineageTag: be48bea3-2abf-5298-8be8-7e61bbdd48af
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_incident_category' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_incident_category = Source{[Schema="analytics",Item="dim_incident_category"]}[Data]
+				in
+				    analytics_dim_incident_category
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,8 @@
+"employee_role_key","employee_role_code","employee_role_name","role_family","clinical_flag","standard_hours_per_fte_month","is_active"
+"1","PHYSICIAN","Physician","Clinical","True","168.0","True"
+"2","NURSING","Nursing","Clinical","True","168.0","True"
+"3","ALLIED","Allied Health","Clinical","True","168.0","True"
+"4","ADMIN_ROLE","Administrative","Administrative","False","168.0","True"
+"5","OPS_SUPPORT","Operations Support","Support","False","168.0","True"
+"6","TECHNOLOGY","Technology","Technology","False","168.0","True"
+"7","MANAGEMENT","Management","Leadership","False","168.0","True"

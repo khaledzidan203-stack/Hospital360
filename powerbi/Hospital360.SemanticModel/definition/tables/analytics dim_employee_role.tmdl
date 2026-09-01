@@ -1,0 +1,70 @@
+table 'analytics dim_employee_role'
+	lineageTag: 086d992d-8d1a-548a-8148-4723fcaa067c
+
+	column employee_role_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 3358e140-10dc-55bc-be42-988b46c0c09d
+		summarizeBy: none
+		sourceColumn: employee_role_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column employee_role_code
+		dataType: string
+		lineageTag: afe69a7f-4ecb-58d6-a5f1-ae633d7c5ab2
+		summarizeBy: none
+		sourceColumn: employee_role_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column employee_role_name
+		dataType: string
+		lineageTag: a33dfc15-c770-59ce-ac3f-10217e47fcdc
+		summarizeBy: none
+		sourceColumn: employee_role_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column role_family
+		dataType: string
+		lineageTag: 525b5987-3bdb-576e-aa4c-c196daff795a
+		summarizeBy: none
+		sourceColumn: role_family
+
+		annotation SummarizationSetBy = Automatic
+
+	column clinical_flag
+		dataType: boolean
+		lineageTag: a1030c67-9365-5a8c-959c-d40c9c544044
+		summarizeBy: none
+		sourceColumn: clinical_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column standard_hours_per_fte_month
+		dataType: double
+		lineageTag: d30e3630-1fa6-53ac-8ad8-2660ab915cc7
+		summarizeBy: sum
+		sourceColumn: standard_hours_per_fte_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		lineageTag: f45dc3c8-7a98-5739-bd8d-616d4894adc7
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_employee_role' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "hospital360"),
+				    analytics_dim_employee_role = Source{[Schema="analytics",Item="dim_employee_role"]}[Data]
+				in
+				    analytics_dim_employee_role
+
+	annotation PBI_ResultType = Table

@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "a0000000000000000017",
   "position": {
     "x": 1264,
     "y": 304,
     "z": 1302,
-    "width": 624,
     "height": 640,
+    "width": 624,
     "tabOrder": 22
   },
   "visual": {
@@ -21,10 +21,10 @@
                   {
                     "value": "Analytical Limitations",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "20px",
-                      "color": "#0F4C45",
-                      "fontWeight": "bold"
+                      "color": "#0f4c45"
                     }
                   }
                 ],
@@ -37,11 +37,10 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "14px",
-                      "color": "#1F2933"
+                      "color": "#1f2933"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               },
               {
                 "textRuns": [
@@ -50,11 +49,10 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "14px",
-                      "color": "#1F2933"
+                      "color": "#1f2933"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               },
               {
                 "textRuns": [
@@ -63,11 +61,10 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "14px",
-                      "color": "#1F2933"
+                      "color": "#1f2933"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               },
               {
                 "textRuns": [
@@ -76,11 +73,10 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "14px",
-                      "color": "#1F2933"
+                      "color": "#1f2933"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               },
               {
                 "textRuns": [
@@ -89,11 +85,10 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "14px",
-                      "color": "#1F2933"
+                      "color": "#1f2933"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               },
               {
                 "textRuns": [
@@ -102,11 +97,10 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "14px",
-                      "color": "#1F2933"
+                      "color": "#1f2933"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               },
               {
                 "textRuns": [
@@ -115,11 +109,10 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "14px",
-                      "color": "#1F2933"
+                      "color": "#1f2933"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               },
               {
                 "textRuns": [
@@ -128,11 +121,10 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "14px",
-                      "color": "#1F2933"
+                      "color": "#1f2933"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               },
               {
                 "textRuns": [
@@ -141,11 +133,10 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "14px",
-                      "color": "#1F2933"
+                      "color": "#1f2933"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               }
             ]
           }
