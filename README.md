@@ -126,7 +126,31 @@ The reproducible Python layer uses aggregated read-only database queries for dis
 
 The version-controlled PBIP/PBIR report contains **13 pages** and **12 Home navigation tiles**, grouped into Healthcare Analytics and Enterprise Performance. PBIP/PBIR source is committed for review; the large, redundant local PBIX binary is intentionally excluded.
 
-See the [final report inventory](docs/architecture/powerbi_final_report_inventory.md), [enterprise Power BI inventory](docs/architecture/enterprise_powerbi_inventory.md), and [manual screenshot checklist](docs/screenshots/README.md).
+See the [final report inventory](docs/architecture/powerbi_final_report_inventory.md), [enterprise Power BI inventory](docs/architecture/enterprise_powerbi_inventory.md), and [full dashboard gallery](docs/screenshots/README.md).
+
+## Dashboard Preview
+
+### Home
+
+![Hospital360 Home dashboard](docs/screenshots/01_home.png)
+
+### Executive Overview
+
+![Hospital360 Executive Overview dashboard](docs/screenshots/02_executive_overview.png)
+
+### Financial Performance
+
+![Hospital360 Financial Performance dashboard](docs/screenshots/03_financial_performance.png)
+
+### Operations & Capacity
+
+![Hospital360 Operations and Capacity dashboard](docs/screenshots/05_operations_capacity.png)
+
+### Technology Performance
+
+![Hospital360 Technology Performance dashboard](docs/screenshots/06_technology_performance.png)
+
+View all seven pages in the [dashboard screenshot gallery](docs/screenshots/README.md).
 
 ## Key KPIs
 
