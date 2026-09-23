@@ -6,6 +6,8 @@ Hospital360 is a production-style healthcare and hospital enterprise performance
 
 > **Portfolio disclosure:** Hospital360 uses synthetic data only. It contains no real patient, employee, customer, company, or hospital financial data and was not deployed inside a real hospital.
 
+![Hospital360 Executive Overview](docs/screenshots/02_executive_overview.png)
+
 ## Featured Portfolio
 
 **Khaled Zidan — Healthcare & Business Data Analytics**
