@@ -12,6 +12,7 @@ Hospital360 is a synthetic healthcare and hospital-enterprise analytics platform
 | Case study | [CASE_STUDY.md](CASE_STUDY.md) |
 | 60–90 second technical walkthrough | [TECHNICAL_WALKTHROUGH.md](TECHNICAL_WALKTHROUGH.md) |
 | Evidence behind project claims | [PROJECT_EVIDENCE_MAP.md](PROJECT_EVIDENCE_MAP.md) |
+| Final release validation | [FINAL_RELEASE_VALIDATION.md](FINAL_RELEASE_VALIDATION.md) |
 | Setup / reproduction | [SETUP.md](SETUP.md) |
 | Architecture | [architecture/README.md](architecture/README.md) |
 | KPI definitions | [kpi_dictionary/](kpi_dictionary/) |
