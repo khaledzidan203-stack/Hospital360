@@ -1,0 +1,65 @@
+name: Repository Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-quality-gate:
+    name: Static analytical quality gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Protect validated analytical core
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA="$(git rev-parse HEAD^ 2>/dev/null || true)"
+          fi
+
+          if [[ -z "$BASE_SHA" ]]; then
+            echo "No previous commit available; skipping protected-path diff."
+            exit 0
+          fi
+
+          CHANGED="$(git diff --name-only "$BASE_SHA" HEAD)"
+          PROTECTED="$(printf '%s\n' "$CHANGED" | grep -E '^(sql/|src/analytics/|src/data_generation/|powerbi/|docs/screenshots/)' || true)"
+
+          if [[ -n "$PROTECTED" ]]; then
+            MESSAGE="$(git log -1 --pretty=%B)"
+            echo "Protected analytical paths changed:"
+            echo "$PROTECTED"
+            if [[ "$MESSAGE" != *"[core-change]"* ]]; then
+              echo "Validated analytical core changes require an explicit [core-change] commit marker and full runtime regression."
+              exit 1
+            fi
+          fi
+
+      - name: Validate repository contract
+        run: python scripts/validate_repository.py
+
+      - name: Run clone-safe unit tests
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Compile Python sources
+        run: python -m compileall -q src tests scripts
