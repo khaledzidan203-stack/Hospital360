@@ -1,148 +1,180 @@
 # Hospital360
 
-## Financial, Operational & Technology Performance Analytics Platform
+## Synthetic Healthcare & Enterprise Analytics Platform
 
-Hospital360 is a production-style healthcare and hospital enterprise performance analytics platform built with realistic synthetic data. It combines PostgreSQL, SQL, Python, and Power BI across patient activity, claims, finance, workforce, operational capacity, and technology reliability.
+[![Repository Validation](https://github.com/khaledzidan203-stack/Hospital360/actions/workflows/repository-validation.yml/badge.svg)](https://github.com/khaledzidan203-stack/Hospital360/actions/workflows/repository-validation.yml)
 
-> **Portfolio disclosure:** Hospital360 uses synthetic data only. It contains no real patient, employee, customer, company, or hospital financial data and was not deployed inside a real hospital.
+Hospital360 is an end-to-end hospital analytics implementation that combines **synthetic healthcare activity and claims** with a separately governed **enterprise performance layer** for Finance, Workforce, Operations, and Technology. The project covers source generation, PostgreSQL data engineering, data quality, dimensional modeling, SQL/Python analytics, Power BI semantic engineering, and release validation.
 
-![Hospital360 Executive Overview](docs/screenshots/02_executive_overview.png)
+> **Data boundary:** all patient, claim, financial, workforce, operations, and IT data is synthetic. Hospital360 contains no real patient records, employee records, confidential organization data, or audited hospital financial statements.
 
-## Featured Portfolio
+<img src="docs/assets/Hospital360%20Healthcare%20Analytics%20Infographic.png" alt="Hospital360 synthetic healthcare and enterprise analytics pipeline" width="100%">
 
-**Khaled Zidan — Healthcare & Business Data Analytics**
+**Start here:** [Case study](docs/CASE_STUDY.md) · [Technical walkthrough](docs/TECHNICAL_WALKTHROUGH.md) · [Evidence map](docs/PROJECT_EVIDENCE_MAP.md) · [Project index](docs/PROJECT_INDEX.md) · [Setup](docs/SETUP.md)
 
-[Saudi Healthcare Analytics](https://github.com/khaledzidan203-stack/saudi-healthcare-analytics) ·
-[Hospital360](https://github.com/khaledzidan203-stack/Hospital360) ·
-[Online Retail Growth & Customer Intelligence](https://github.com/khaledzidan203-stack/online-retail-growth-customer-intelligence) ·
-[Pharmacy Category Management](https://github.com/khaledzidan203-stack/pharmacy-category-management) ·
-[Regional Sales Performance](https://github.com/khaledzidan203-stack/regional-sales-analytics-portfolio)
+## Project at a glance
 
-**Core stack:** Power BI · SQL · Python · DAX · Analytics Engineering · Healthcare / Pharmacy / Retail Analytics
+| Area | Implemented state |
+|---|---|
+| Healthcare source | Synthea synthetic healthcare data |
+| Enterprise source | Deterministic synthetic Finance, Budget, Workforce, Operations, and IT generator |
+| Healthcare working baseline | 5,000 synthetic patients · 5,515,928 RAW rows |
+| Healthcare analytical facts | 5 facts: Encounter, Claim, Claim Transaction, Condition Occurrence, Procedure |
+| Enterprise extension | 36 months · 25,716 fact rows · 6 enterprise facts |
+| Database architecture | PostgreSQL `RAW → STAGING → ANALYTICS` |
+| Analysis | Read-only SQL + Python/Jupyter analytical layer |
+| Power BI | PBIP/PBIR/TMDL · current 13-page report · 12 Home tiles |
+| Validation | RAW/STAGING/ANALYTICS reconciliation · SQL regression · DQ · repository CI |
+| Scale testing | Clean 20K source generated and RAW-loaded; STAGING bottleneck documented, full 20K pipeline not claimed complete |
 
-## Executive Summary
+## Why the architecture matters
 
-The project demonstrates an end-to-end analytics lifecycle:
+Hospital performance data does not live at one grain. Patient activity, claims, budgets, staffing, bed/capacity operations, and technology reliability describe different processes. Flattening them into one table or joining facts directly can multiply amounts and create false relationships.
 
-```text
-Synthetic sources → RAW → STAGING → DATA QUALITY → STAR SCHEMA
-                  → SQL + PYTHON → POWER BI → MANAGEMENT INSIGHTS
-```
+Hospital360 therefore enforces a few core rules:
 
-Healthcare activity comes from Synthea. A separate deterministic enterprise generator creates synthetic Finance, Workforce, Operations, and IT data. The two domains share governed dimensions without treating healthcare claims as hospital revenue or profitability.
+1. **Preserve source grain before aggregation.**
+2. **Keep healthcare and enterprise facts separate.**
+3. **Use governed dimensions instead of fact-to-fact relationships.**
+4. **Do not treat Synthea claim values as hospital revenue or profitability.**
+5. **Retain data-quality warnings and anomalies rather than silently deleting them.**
+6. **Reconcile every major pipeline boundary before reporting.**
 
-## Business Problem
-
-Hospital leaders need a consistent view of patient activity, financial performance, workforce capacity, operational pressure, and technology reliability. Those domains often arrive at different grains and can produce misleading totals when joined directly. Hospital360 addresses that problem with source-preserving ingestion, explicit data-quality controls, dimensional modeling, reconciled KPIs, and management-ready dashboards.
-
-## Project Objectives
-
-- Build a reliable, traceable healthcare analytics architecture.
-- Validate source data before it reaches reporting models.
-- Integrate clinical activity and enterprise performance at governed shared dimensions.
-- Define reusable SQL, Python, and DAX metrics at correct fact grains.
-- Deliver a navigable executive Power BI report.
-- Demonstrate production-style analytics engineering, testing, documentation, and Git practices.
-
-## Architecture
+## End-to-end architecture
 
 ```mermaid
-flowchart TD
-    H[Synthetic Healthcare Data<br/>Synthea] --> R[RAW]
-    E[Synthetic Enterprise Data<br/>Finance · HR · Operations · IT] --> R
-    R --> S[STAGING]
-    S --> Q[DATA QUALITY]
-    Q --> A[PostgreSQL Analytics Star Schema]
-    A --> X[SQL + Python]
-    X --> P[Power BI]
-    P --> M[Management Insights]
+flowchart LR
+    H[Synthea healthcare sources] --> R[RAW]
+    E[Deterministic enterprise generator] --> R
+    R --> S[STAGING + DQ]
+    S --> A[ANALYTICS star schemas]
+    A --> Q[SQL validation]
+    A --> Y[Python analytics]
+    Q --> P[Power BI semantic model]
+    Y --> P
+    P --> B[13-page PBIR report]
+    B --> V[Release validation / CI]
 ```
 
-Detailed design: [Architecture documentation](docs/architecture/README.md).
+Detailed design: [Architecture summary](docs/architecture/README.md).
 
-## Technology Stack
+## 1. Synthetic healthcare pipeline
 
-| Area | Technologies |
-|---|---|
-| Database and modeling | PostgreSQL, SQL, star schemas |
-| Data engineering | Python, pandas, deterministic generators |
-| Analysis | SQL, Python, Jupyter, NumPy, seaborn, Matplotlib |
-| Business intelligence | Power BI, DAX, Power Query, PBIP/PBIR |
-| Source and delivery | Synthea, Git, GitHub |
+The accepted analytical baseline contains exactly **5,000 synthetic patients**. The approved healthcare RAW sources reconcile to **5,515,928 rows**:
 
-## Data
+| Healthcare fact | Validated rows |
+|---|---:|
+| Encounters | 253,563 |
+| Claims | 435,751 |
+| Claim transactions | 3,966,064 |
+| Condition occurrences | 159,348 |
+| Procedures | 696,202 |
 
-### Synthetic healthcare dataset
+The healthcare model also uses governed Date, Patient, Provider, Organization, Payer, Condition, and Procedure dimensions with surrogate keys and explicit Unknown-member handling where appropriate.
 
-- Final analytical population: **5,000 patients**.
-- Core domains: encounters, claims, claim transactions, conditions, and procedures.
-- Validated facts: **253,563 encounters**, **435,751 claims**, **3,966,064 claim transactions**, **696,202 procedures**, and **159,348 condition occurrences**.
-- An earlier 20,000-patient run served as a scalability/stress test. The final working analytical dataset uses 5,000 patients for practical local execution.
+The optimized STAGING V2 pipeline preserved V1 business rules while improving execution. At the validated 5K scale, RAW-to-STAGING differences are **0**, STAGING-to-fact differences are **0**, duplicate fact grains are **0**, broken required lookups are **0**, and validated financial reconciliation differences are **0.00**.
 
-### Synthetic enterprise extension
+See [portfolio scale validation](docs/architecture/portfolio_scale_validation.md) and [healthcare star schema](docs/architecture/analytics_star_schema.md).
 
-- 36 complete months: **2023-08-01 through 2026-07-31**.
-- **25,716** final enterprise fact rows.
-- Domains: Finance, Budget, Workforce, Operations, IT Incidents, and IT System performance.
+## 2. Synthetic enterprise extension
 
-Multi-gigabyte generated RAW files are intentionally excluded from Git. Small public examples are available in [`data/sample/`](data/sample/).
+A deterministic generator extends Hospital360 with a separate **36-month** enterprise scenario from **2023-08-01 through 2026-07-31**.
 
-## Analytical Domains
+| Enterprise fact | Rows |
+|---|---:|
+| Finance Monthly | 2,592 |
+| Budget Monthly | 1,296 |
+| Workforce Monthly | 2,160 |
+| Operations Daily | 8,768 |
+| IT Incident | 2,132 |
+| IT System Daily | 8,768 |
+| **Total** | **25,716** |
 
-### Healthcare analytics
+Generation progressed through 1-, 3-, 12-, and 36-month acceptance gates before the final snapshot entered PostgreSQL. The accepted extension records **0 fatal DQ errors**, while retaining **633 warnings** and **1,257 business anomalies** as review signals.
 
-- Executive Overview
-- Patient & Encounter Activity
-- Claims & Financial Activity
-- Payer Analysis
-- Provider & Organization Activity
-- Clinical Utilization
-- Time Trends
-- Data Quality & Analytical Limitations
+Healthcare activity can act as an aggregated synthetic operating driver, but enterprise facts do not contain Patient, Encounter, or Claim foreign keys. Claims remain claims; enterprise finance remains a separate synthetic business layer.
 
-### Enterprise performance
+See [enterprise implementation](docs/architecture/enterprise_implementation.md) and [enterprise star schema](docs/architecture/enterprise_star_schema.md).
 
-- Financial Performance
-- Workforce Performance
-- Operations & Capacity
-- Technology Performance
+## 3. PostgreSQL analytical model
 
-## Data Model
-
-Hospital360 uses analytics-ready star schemas with surrogate keys, conformed Date and Organization dimensions, single-direction filtering, and Unknown members where source references are missing. Enterprise facts also share Department and domain-specific dimensions. Facts remain at their native grains; there are **no fact-to-fact relationships**.
-
-See the [healthcare star schema](docs/architecture/analytics_star_schema.md), [enterprise star schema](docs/architecture/enterprise_star_schema.md), [data dictionaries](docs/data_dictionary/), and [KPI dictionaries](docs/kpi_dictionary/).
-
-## Data Quality Strategy
+The database follows a layered design:
 
 ```text
-SOURCE → RAW parity → STAGING validation → DQ classification
-       → ANALYTICS reconciliation → KPI validation
+SOURCE
+  ↓
+RAW          source-preserving landing
+  ↓
+STAGING      typing · normalization · DQ flags
+  ↓
+ANALYTICS    dimensions · facts · governed grains
 ```
 
-Enterprise findings are classified as `ERROR`, `WARNING`, or `BUSINESS_ANOMALY`. The accepted extension has **0 fatal errors**, **633 warnings**, and **1,257 retained business anomalies**. Warnings and anomalies are review signals, not automatically invalid rows.
+The analytical schemas use surrogate keys, conformed Date and Organization dimensions, domain-specific dimensions, explicit Unknown members, and no direct fact-to-fact relationships.
 
-Healthcare source sentinel timestamps and Unknown members are preserved when analytically appropriate so missing or source-specific values remain visible rather than being silently discarded.
+SQL under [`sql/analysis/`](sql/analysis/) is read-only and validates safe aggregation, KPI behavior, reconciliation, and cross-domain analysis without multiplying amounts.
 
-## SQL Analytics
+At the accepted 5K healthcare scale, the regression framework executed **47/47 SQL queries successfully**, with **0 failed queries** and **0 validation failures**.
 
-The read-only SQL framework validates KPIs, reconciles facts, performs safe aggregation, and supports healthcare and enterprise cross-domain analysis without multiplying amounts. Explore the scripts in [`sql/analysis/`](sql/analysis/) and the [SQL findings](docs/insights/sql_5k_findings.md).
+## 4. Python analytical layer
 
-## Python Analytics
+Python supports read-only exploratory analysis, distributions, trends, outlier inspection, and cross-domain associations. The database connector restricts analytical queries to read-only behavior, and documented associations are not described as causal.
 
-The reproducible Python layer uses aggregated read-only database queries for distributions, trends, outlier inspection, and cross-domain associations. Outliers are retained, and associations are not described as causal.
+Key entry points:
 
-- [Enterprise EDA notebook](notebooks/02_enterprise_performance_eda.ipynb)
 - [Healthcare Python findings](docs/insights/python_eda_findings.md)
 - [Enterprise Python findings](docs/insights/enterprise_python_findings.md)
+- [Healthcare EDA notebook](notebooks/01_hospital360_eda.ipynb)
+- [Enterprise EDA notebook](notebooks/02_enterprise_performance_eda.ipynb)
 
-## Power BI Dashboard
+## 5. Power BI semantic model and report
 
-The version-controlled PBIP/PBIR report contains **13 pages** and **12 Home navigation tiles**, grouped into Healthcare Analytics and Enterprise Performance. PBIP/PBIR source is committed for review; the large, redundant local PBIX binary is intentionally excluded.
+The current version-controlled Power BI project contains:
 
-See the [final report inventory](docs/architecture/powerbi_final_report_inventory.md), [enterprise Power BI inventory](docs/architecture/enterprise_powerbi_inventory.md), and [full dashboard gallery](docs/screenshots/README.md).
+- PBIP entry point;
+- PBIR report source;
+- TMDL semantic-model source;
+- governed healthcare and enterprise business tables;
+- DAX measures grouped by analytical domain;
+- **13 report pages**;
+- **12 Home navigation tiles**.
 
-## Dashboard Preview
+The current report spans healthcare activity, claims, payer/provider analysis, clinical utilization, time trends, data quality, financial performance, workforce, operations/capacity, and technology performance.
+
+The historical file `docs/architecture/powerbi_final_report_inventory.md` documents the **nine-page healthcare baseline**. The later enterprise extension retained those pages and added four enterprise pages, producing the current 13-page integrated release documented in [Enterprise Power BI Inventory](docs/architecture/enterprise_powerbi_inventory.md).
+
+### Power BI time-model note
+
+The saved model has an explicit governed `analytics dim_date`, but Power BI Auto Date/Time is also still enabled and LocalDateTable artifacts remain in TMDL. Those artifacts are documented as a model-hygiene item rather than deleted blindly from source control. Safe remediation requires Power BI Desktop dependency and regression checks. See [Power BI Time-Intelligence Audit](docs/architecture/POWER_BI_TIME_INTELLIGENCE_AUDIT.md).
+
+## 6. Validation and engineering evidence
+
+| Validation layer | Recorded result |
+|---|---|
+| Accepted healthcare population | Exactly 5,000 synthetic patients |
+| Source → RAW | Core source count differences = 0 |
+| RAW → STAGING | Differences = 0 across six healthcare tables |
+| STAGING V1/V2 parity sample | 17,165 rows; typed-value/DQ/hash differences = 0 |
+| STAGING → healthcare facts | Differences = 0 across all five facts |
+| Duplicate fact grains | 0 |
+| Broken required lookups | 0 |
+| SQL regression | 47 / 47 successful; 0 validation failures |
+| Enterprise generation | 36-month final profile PASS; 25,716 fact rows |
+| Enterprise DQ | 0 fatal errors; 633 warnings; 1,257 retained anomalies |
+| Power BI current structure | 13 pages; 12 Home actions |
+| Repository validation | Clone-safe static checks + unit tests in GitHub Actions |
+
+The project preserves unresolved source behavior rather than silently correcting it. For example, known Synthea sentinel timestamps remain visible, and 547 non-sentinel transaction date-order warnings remain documented as **To Be Validated**.
+
+## 7. Scalability test: what the 20K result actually means
+
+A clean Synthea generation with overflow disabled produced exactly **20,000 patients**, and the approved RAW sources loaded successfully. During STAGING, the claims insert remained active for multiple hours with PostgreSQL `DataFileRead` I/O waits and no blocking backend.
+
+The 20K pipeline was therefore **not completed** and is not presented as a successful end-to-end production run. The validated working release remains the 5K pipeline. This distinction is intentionally documented as an engineering scalability finding.
+
+## Power BI preview
+
+The repository stores **7 representative screenshots** from the current **13-page** report.
 
 ### Home
 
@@ -156,75 +188,67 @@ See the [final report inventory](docs/architecture/powerbi_final_report_inventor
 
 ![Hospital360 Financial Performance dashboard](docs/screenshots/03_financial_performance.png)
 
-### Operations & Capacity
+### Data Quality & Analytical Limitations
 
-![Hospital360 Operations and Capacity dashboard](docs/screenshots/05_operations_capacity.png)
+![Hospital360 Data Quality dashboard](docs/screenshots/07_data_quality.png)
 
-### Technology Performance
+See the [representative screenshot gallery](docs/screenshots/README.md) for all seven saved captures.
 
-![Hospital360 Technology Performance dashboard](docs/screenshots/06_technology_performance.png)
+## KPI domains
 
-View all seven pages in the [dashboard screenshot gallery](docs/screenshots/README.md).
-
-## Key KPIs
-
-| Domain | Selected KPIs |
+| Domain | Examples |
 |---|---|
-| Healthcare | Patients, Encounters, Claims, Transaction Amount, Payer Coverage, Encounters per Patient, Claims per Encounter, Procedures per Encounter, Unknown Payer %, Unknown Transaction Payer % |
-| Enterprise Finance | Revenue, Operating Cost, Operating Margin, Budget Variance, Cost per Encounter |
-| Workforce | Headcount, FTE, Payroll Cost, Overtime, Absence Rate, Turnover Rate, Encounters per FTE |
-| Operations | Admissions, Discharges, Occupancy Rate, Average Length of Stay, Waiting Time, Appointment Completion % |
-| Technology | Uptime %, Downtime Minutes, Incident Count, Critical Incidents, SLA Compliance %, Mean Resolution Time |
+| Healthcare | Patients, Encounters, Claims, Claim Transactions, Payer Coverage, Procedures, Unknown Payer exposure |
+| Finance | Revenue, Operating Cost, Operating Margin, Budget Variance, Cost per Encounter |
+| Workforce | Headcount, FTE, Payroll Cost, Overtime, Absence, Turnover, Encounters per FTE |
+| Operations | Admissions, Discharges, Occupancy, Average Length of Stay, Waiting Time, Appointment Completion |
+| Technology | Uptime, Downtime Minutes, Incidents, P1 Incidents, SLA Compliance, Resolution Time |
 
-Definitions and grain rules are in the [KPI dictionaries](docs/kpi_dictionary/).
+Definitions and grain rules are documented in the [KPI dictionaries](docs/kpi_dictionary/).
 
-## Selected Synthetic Analytical Findings
+## Reproduce the project
 
-- 5,000 synthetic patients generated 253,563 encounters, or approximately **50.71 encounters per patient**.
-- Claims per encounter are approximately **1.72**; procedures per encounter are approximately **2.75**.
-- The leading transaction payer represents approximately **26.51%** of transaction amount.
-- Unknown primary payer affects approximately **8.26%** of claims; Unknown transaction payer affects approximately **4.32%** of transaction rows.
-- The enterprise scenario contains $5.34M synthetic operating revenue, $130.14M synthetic operating cost, and 25,716 fact rows across 36 months.
-- IT system activity totals 2.18M synthetic transactions with **99.9374%** weighted uptime; 38 of 2,132 incidents are P1.
+Prerequisites and complete run order are documented in [Setup and Run Guide](docs/SETUP.md). The high-level local sequence is:
 
-These are **synthetic analytical findings**, not real hospital results. Full interpretation and limitations are documented in [healthcare SQL findings](docs/insights/sql_5k_findings.md) and [enterprise SQL findings](docs/insights/enterprise_sql_findings.md).
-
-## Repository Structure
-
-```text
-Hospital360/
-├── data/
-│   └── sample/
-├── docs/
-├── notebooks/
-├── powerbi/
-├── sql/
-├── src/
-├── tests/
-├── tools/
-├── README.md
-├── requirements.txt
-├── LICENSE
-└── CHANGELOG.md
+```powershell
+git clone https://github.com/khaledzidan203-stack/Hospital360.git
+cd Hospital360
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python scripts/validate_repository.py
+python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
-## Limitations
+Full healthcare reproduction additionally requires a locally generated Synthea source snapshot and PostgreSQL. Large RAW files, credentials, PBIX binaries, and Power BI caches are intentionally excluded from Git. See [Environment Baseline](docs/ENVIRONMENT_BASELINE.md).
 
-- All data is synthetic; no real patient records or confidential organization data are included.
-- Synthea claim/activity fields are not hospital profitability or a real P&L.
-- The separate enterprise finance layer is synthetic and is not an audited financial statement.
-- Department allocation is a reproducible synthetic operating model, not clinical truth.
-- Analytical associations do not prove real-world causation.
+## Repository structure
+
+```text
+data/          ignored generated RAW/processed data + public synthetic samples
+docs/          architecture, governance, evidence, insights, screenshots
+notebooks/     healthcare and enterprise Python EDA
+powerbi/       PBIP, PBIR, TMDL, DAX/model source
+scripts/       clone-safe repository validation
+sql/           PostgreSQL DDL, staging, marts, analysis
+src/           active analytics and enterprise-generation Python code
+tests/         clone-safe tests plus local full-data acceptance checks
+```
+
+Reserved historical scaffold directories are explained in [Repository Structure Notes](docs/REPOSITORY_STRUCTURE_NOTES.md).
+
+## Interpretation limits
+
+- All data is synthetic; no real-world patient outcome or hospital-performance inference should be drawn from the values.
+- Synthea claim/activity amounts are not hospital profitability or an audited P&L.
+- Enterprise finance and workforce data are deterministic synthetic scenarios.
+- Department allocation is a reproducible operating model, not clinical truth.
+- Associations do not establish causality.
 - Unknown and sentinel records are retained where analytically appropriate.
-- Hospital360 is a portfolio system, not a production hospital deployment.
+- The 20K test documents a scalability bottleneck; it is not a completed 20K end-to-end release.
 
-## Getting Started and Documentation
+## Documentation
 
-- [Setup and run guide](docs/SETUP.md)
-- [Documentation index](docs/README.md)
-- [Architecture summary](docs/architecture/README.md)
-- [Contributing](CONTRIBUTING.md)
-- [Security and privacy](SECURITY.md)
-- [Changelog](CHANGELOG.md)
+[Project index](docs/PROJECT_INDEX.md) · [Architecture](docs/architecture/README.md) · [Documentation index](docs/README.md) · [Evidence map](docs/PROJECT_EVIDENCE_MAP.md) · [Security](SECURITY.md) · [Changelog](CHANGELOG.md)
 
 Licensed under the [MIT License](LICENSE).
